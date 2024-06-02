@@ -1,0 +1,1 @@
+export { SmartbudgetLogo } from "./SmartbudgetLogo";

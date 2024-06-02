@@ -1,14 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {Registrazione, Login} from './pages';
+import {LandingPage} from './pages/LandingPage';
+import {Login} from './pages/Login';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/registrazione" element={<Registrazione />} />
+        <Route path="/registrazione" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Login />} /> {/* Redirect to login by default */}
+        <Route path="/" element={<LandingPage />} /> {/* Redirect a registrazione di default */}
       </Routes>
     </BrowserRouter>
   );

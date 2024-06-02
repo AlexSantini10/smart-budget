@@ -1,0 +1,10 @@
+:root {
+    --variable-collection-bilancio-negativo: rgba(240, 25, 25, 1);
+    --variable-collection-bilancio-negativo-2: rgba(241, 51, 51, 1);
+    --variable-collection-bilancio-negativo-2-90: rgba(241, 51, 51, 0.9);
+    --variable-collection-bilancio-positivo: var(--variable-collection-smart-budget-main-theme);
+    --variable-collection-notion-title: rgba(51, 52, 55, 1);
+    --variable-collection-notion-title-duplicate: rgba(51, 52, 55, 1);
+    --variable-collection-smart-budget-main-theme: rgba(56, 160, 255, 1);
+    --variable-collection-testo-secondario: rgba(118, 118, 118, 1);
+}
