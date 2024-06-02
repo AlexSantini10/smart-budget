@@ -5,6 +5,7 @@ const {user_exists, get_user_by_email} = require('../db/users.js');
 const {createJWT} = require('../utils/createJWT.js');
 
 const {BadRequestError, NotFoundError, UnauthenticatedError} = require('../errors');
+const { Time } = require('mssql');
 
 const register = async (req, res) => {
     const {name, lastName, email, password} = req.body;
@@ -14,15 +15,14 @@ const register = async (req, res) => {
     }
 
     const userAlreadyExists = await user_exists(email);
-    if (userAlreadyExists && false) {
+    if (userAlreadyExists) {
         throw new BadRequestError('Email already exists');
     }
 
-    // TODO: create a new user
     const pool = await connect();
     const query = `
         INSERT INTO utenti (nome, cognome, email, password) 
-        VALUES (@name, @lastName, @Email, CONVERT(NVARCHAR(100), HASHBYTES('SHA2_256', @password), 2))
+        VALUES (@name, @lastName, @email, CONVERT(NVARCHAR(100), HASHBYTES('SHA2_256', @password), 2))
     `;
     const request = pool.request();
     request.input('name', name);
@@ -30,13 +30,23 @@ const register = async (req, res) => {
     request.input('email', email);
     request.input('password', password);
 
-    /*await request.query(query, (err, result) => {
+    await request.query(query, (err, result) => {
         if (err) {
             throw new Error(err);
         }
-    });*/
+    });
+    
+    let user = await get_user_by_email(email);
 
-    const user = await get_user_by_email(email);
+    let max_attempts = 50;
+    while (!user && max_attempts-- > 0) {
+        user = await get_user_by_email(email);
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    
+    if (!user) {
+        throw new Error('User not found after registration');
+    }
     
     const token = createJWT(user);
     attachCookie({res, token});

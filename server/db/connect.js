@@ -16,6 +16,7 @@ const dbConfig = {
 async function connect() {
     try {
         return await sql.connect(dbConfig);
+        console.log('Database connection established');
     } catch (err) {
         console.error(err);
     }
