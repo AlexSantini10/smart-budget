@@ -1,14 +1,15 @@
 const StatusCodes = require('http-status-codes');
 const attachCookie = require('../utils/attachCookie.js');
-const {user_exists, get_user_by_email, create_user} = require('../db/users.js');
+const {user_exists, get_user_by_email, create_user, authenticate_user, edit_user} = require('../db/users.js');
+const {generate_password_sha2_256} = require('../db/utils.js');
 const {createJWT} = require('../utils/createJWT.js');
 
 const {BadRequestError, NotFoundError, UnauthenticatedError} = require('../errors');
 
 const register = async (req, res) => {
-    const {name, lastName, email, password} = req.body;
+    const {nome, cognome, email, password} = req.body;
 
-    if (!name || !lastName || !email || !password) {
+    if (!nome || !cognome || !email || !password) {
         throw new BadRequestError('Please provide all values');
     }
 
@@ -18,7 +19,7 @@ const register = async (req, res) => {
     }
 
     
-    await create_user(name, lastName, email, password);
+    await create_user(nome, cognome, email, password);
     let user = await get_user_by_email(email);
 
     let max_attempts = 50;
@@ -38,8 +39,7 @@ const register = async (req, res) => {
             email: user.email, 
             cognome: user.cognome,
             nome: user.nome
-        }, 
-        location: 'Italy'
+        }
     });
 }
 
@@ -50,58 +50,79 @@ const login = async (req, res) => {
         throw new BadRequestError('Please provide all values');
     }
 
-    const user = await User.findOne({email}).select('+password');
+    const auth = await authenticate_user(email, password);
 
-    if (!user) {
+    if (!auth) {
         throw new UnauthenticatedError('Invalid credentials');
     }
 
-    const isPasswordCorrect = await user.comparePasswords(password);
-    if (!isPasswordCorrect) {
-        throw new UnauthenticatedError('Invalid credentials');
-    }
+    const user = await get_user_by_email(email);
 
-    const token = user.createJWT();
+    const token = await createJWT(user);
 
-    user.password = undefined;
     attachCookie({res, token});
     res.status(StatusCodes.OK).json({
-        user,
-        location: user.location
-    })
+        user: {
+            email: user.email, 
+            cognome: user.cognome,
+            nome: user.nome
+        }
+    });
 }
 
 const updateUser = async (req, res) => {
-    const {email, name, lastName, location} = req.body;
+    const {email, nome, cognome} = req.body;
 
-    if (!email || !name || !lastName || !location) {
-        throw new BadRequestError('Please provide all values');
+    if (!email && !nome && !cognome) {
+        throw new BadRequestError('Please provide some values to update');
     }
 
-    const user = await User.findOne({_id: req.user.userId});
+    const user = await get_user_by_email(req.user.email);
 
-    user.email = email;
-    user.name = name;
-    user.lastName = lastName;
-    user.location = location;
+    if (!user) {
+        throw new NotFoundError('User not found');
+    }
 
-    await user.save();
+    data_to_update = {}
+    if (nome) {
+        data_to_update.nome = nome;
+    }
+    if (cognome) {
+        data_to_update.cognome = cognome;
+    }
 
-    const token = user.createJWT();
+    await edit_user(req.user.email, data_to_update);
 
-    attachCookie({res, token});
     res.status(StatusCodes.OK).json({
-        user,
-        location: user.location
+        user: {
+            email: email || user.email, 
+            cognome: cognome || user.cognome,
+            nome: nome || user.nome
+        }
     });
 }
 
 const getCurrentUser = async (req, res) => {
-    const user = await User.findOne({_id: req.user.userId});
-    res.status(StatusCodes.OK).json({user, location:user.location});
+    const user = await get_user_by_email(req.user.email);
+
+    if (!user) {
+        throw new NotFoundError('User not found');
+    }
+
+    res.status(StatusCodes.OK).json({
+        user: {
+            email: user.email, 
+            cognome: user.cognome,
+            nome: user.nome
+        }
+    });
 }
 
 const logout = async (req, res) => {
+    if (!req.cookies.token) {
+        throw new UnauthenticatedError('Not logged in');
+    }
+
     res.cookie('token', 'none', {
         httpOnly: true,
         expires: new Date(Date.now() + 1000)
