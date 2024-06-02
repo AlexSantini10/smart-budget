@@ -1,11 +1,9 @@
 const StatusCodes = require('http-status-codes');
 const attachCookie = require('../utils/attachCookie.js');
-const {connect} = require('../db/connect.js');
-const {user_exists, get_user_by_email} = require('../db/users.js');
+const {user_exists, get_user_by_email, create_user} = require('../db/users.js');
 const {createJWT} = require('../utils/createJWT.js');
 
 const {BadRequestError, NotFoundError, UnauthenticatedError} = require('../errors');
-const { Time } = require('mssql');
 
 const register = async (req, res) => {
     const {name, lastName, email, password} = req.body;
@@ -19,23 +17,8 @@ const register = async (req, res) => {
         throw new BadRequestError('Email already exists');
     }
 
-    const pool = await connect();
-    const query = `
-        INSERT INTO utenti (nome, cognome, email, password) 
-        VALUES (@name, @lastName, @email, CONVERT(NVARCHAR(100), HASHBYTES('SHA2_256', @password), 2))
-    `;
-    const request = pool.request();
-    request.input('name', name);
-    request.input('lastName', lastName);
-    request.input('email', email);
-    request.input('password', password);
-
-    await request.query(query, (err, result) => {
-        if (err) {
-            throw new Error(err);
-        }
-    });
     
+    await create_user(name, lastName, email, password);
     let user = await get_user_by_email(email);
 
     let max_attempts = 50;
