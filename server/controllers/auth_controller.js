@@ -1,0 +1,128 @@
+const StatusCodes = require('http-status-codes');
+const attachCookie = require('../utils/attachCookie.js');
+const {connect} = require('../db/connect.js');
+const {user_exists, get_user_by_email} = require('../db/users.js');
+const {createJWT} = require('../utils/createJWT.js');
+
+const {BadRequestError, NotFoundError, UnauthenticatedError} = require('../errors');
+
+const register = async (req, res) => {
+    const {name, lastName, email, password} = req.body;
+
+    if (!name || !lastName || !email || !password) {
+        throw new BadRequestError('Please provide all values');
+    }
+
+    const userAlreadyExists = await user_exists(email);
+    if (userAlreadyExists && false) {
+        throw new BadRequestError('Email already exists');
+    }
+
+    // TODO: create a new user
+    const pool = await connect();
+    const query = `
+        INSERT INTO utenti (nome, cognome, email, password) 
+        VALUES (@name, @lastName, @Email, CONVERT(NVARCHAR(100), HASHBYTES('SHA2_256', @password), 2))
+    `;
+    const request = pool.request();
+    request.input('name', name);
+    request.input('lastName', lastName);
+    request.input('email', email);
+    request.input('password', password);
+
+    /*await request.query(query, (err, result) => {
+        if (err) {
+            throw new Error(err);
+        }
+    });*/
+
+    const user = await get_user_by_email(email);
+    
+    const token = createJWT(user);
+    attachCookie({res, token});
+    res.status(StatusCodes.CREATED).json({
+        user: {
+            email: user.email, 
+            cognome: user.cognome,
+            nome: user.nome
+        }, 
+        location: 'Italy'
+    });
+}
+
+const login = async (req, res) => {
+    const {email, password} = req.body;
+
+    if (!email || !password) {
+        throw new BadRequestError('Please provide all values');
+    }
+
+    const user = await User.findOne({email}).select('+password');
+
+    if (!user) {
+        throw new UnauthenticatedError('Invalid credentials');
+    }
+
+    const isPasswordCorrect = await user.comparePasswords(password);
+    if (!isPasswordCorrect) {
+        throw new UnauthenticatedError('Invalid credentials');
+    }
+
+    const token = user.createJWT();
+
+    user.password = undefined;
+    attachCookie({res, token});
+    res.status(StatusCodes.OK).json({
+        user,
+        location: user.location
+    })
+}
+
+const updateUser = async (req, res) => {
+    const {email, name, lastName, location} = req.body;
+
+    if (!email || !name || !lastName || !location) {
+        throw new BadRequestError('Please provide all values');
+    }
+
+    const user = await User.findOne({_id: req.user.userId});
+
+    user.email = email;
+    user.name = name;
+    user.lastName = lastName;
+    user.location = location;
+
+    await user.save();
+
+    const token = user.createJWT();
+
+    attachCookie({res, token});
+    res.status(StatusCodes.OK).json({
+        user,
+        location: user.location
+    });
+}
+
+const getCurrentUser = async (req, res) => {
+    const user = await User.findOne({_id: req.user.userId});
+    res.status(StatusCodes.OK).json({user, location:user.location});
+}
+
+const logout = async (req, res) => {
+    res.cookie('token', 'none', {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000)
+    });
+
+    res.status(StatusCodes.OK).json({
+        msg: 'Logged out'
+    });
+}
+
+module.exports = {
+    register,
+    login,
+    updateUser,
+    getCurrentUser,
+    logout
+};
