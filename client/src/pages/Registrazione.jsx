@@ -1,15 +1,21 @@
 import React from 'react';
 
+import Logo from '../components/LogoLanding';
+import Titolo from '../components/TitoloLanding';
+import InputField from '../components/InputField';
+
 const Registrazione = () => {
   return (
     <div style={styles.container}>
-      <img src="logo.png" alt="SmartBudget Logo" style={styles.logo} />
-      <h1 style={styles.heading}>SmartBudget</h1>
+      <p>
+      <Logo/>
+      <Titolo title="Smart Budget"/>
+      </p>
       <h2 style={styles.subheading}>Benvenuto!</h2>
       <p style={styles.description}>Crea un account per iniziare</p>
       <form style={styles.form}>
         <div style={styles.row}>
-          <input type="text" placeholder="Nome" style={styles.input} />
+          <InputField label="Nome" />
           <input type="text" placeholder="Cognome" style={styles.input} />
         </div>
         <input type="email" placeholder="Email" style={styles.input} />
@@ -35,10 +41,6 @@ const styles = {
     height: '50px',
     marginBottom: '20px'
   },
-  heading: {
-    fontSize: '32px',
-    fontWeight: 'bold'
-  },
   subheading: {
     fontSize: '24px',
     marginBottom: '20px'
@@ -55,12 +57,6 @@ const styles = {
   row: {
     display: 'flex',
     justifyContent: 'space-between'
-  },
-  input: {
-    width: '48%',
-    padding: '10px',
-    marginBottom: '10px',
-    fontSize: '16px'
   },
   button: {
     padding: '10px',
