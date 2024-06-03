@@ -9,7 +9,9 @@ const TextInput = ({labelName, textType}) => {
     }
 
     return (
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
+        <div>
+            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
+        </div>
     )
 }
 
