@@ -1,4 +1,5 @@
-import Registrazione from "./Registrazione";
+import LandingPage from "./LandingPage";
 import Login from "./Login";
 
-export { Registrazione, Login };
+
+export { LandingPage, Login };
