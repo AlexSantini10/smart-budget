@@ -11,9 +11,9 @@ export const TextInput = ({ className, inputType = "email" }) => {
   return (
     <div className={`text-input ${className}`}>
       <div className="overlap-group">
-        <div className="accedi-button" />
+        <input type="text" className="accedi-button"></input>
         <div className="rectangle" />
-        <input className="email" placeholder="Email" type={inputType} />
+        <label className="email">Email</label>
       </div>
     </div>
   );
