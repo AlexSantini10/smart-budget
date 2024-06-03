@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({labelName, textType}) => {
+const TextInput = ({labelText, textType}) => {
     const [value, setValue] = useState('');
 
     const handleChange = (event) => {
@@ -9,8 +9,8 @@ const TextInput = ({labelName, textType}) => {
     }
 
     return (
-        <div>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
+        <div style={{margin:'10px'}}>
+            <TextField type={textType} label={labelText} variant="outlined" onChange={handleChange} />
         </div>
     )
 }

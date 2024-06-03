@@ -1,14 +1,18 @@
 import React from 'react'
-import { TextInput, Logo, LogoAndTitle } from '../components'
+import { TextInput, LogoAndTitle, DropDown, PrimaryButton } from '../components'
 
 const LandingPage = () => {
   return (
     <div style={{ padding: '10px'}}>
       <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px' }}>
         <LogoAndTitle />
+        <TextInput labelText="Nome" />
+        <TextInput labelText="Cognome" />
+        <TextInput labelText="Email" textType="email" />
+        <TextInput labelText="Password" textType="password" />
       </div>
-      <TextInput />
-      <Logo />
+      <DropDown labelText="Conto" elements={{1:'Conto Corrente', 2:'Conto Risparmio'}} />
+      <PrimaryButton labelText="Registrati" />
     </div>
   )
 }
