@@ -1,5 +1,5 @@
 import React from 'react'
-import {DropDown, Logo, LogoAndTitle, PrimaryButton, TextInput, OutlinedButton} from '../components'
+import {DropDown, Logo, LogoAndTitle, PrimaryButton, TextInput, OutlinedButton, Header,} from '../components'
 const ProveJem = () => {
   return (
     <div>
@@ -9,6 +9,7 @@ const ProveJem = () => {
         <PrimaryButton labelText={"Crea Account"}> </PrimaryButton>
         <TextInput labelText={"Nome"}></TextInput>
         <OutlinedButton labelText={"+ Aggiungi"}></OutlinedButton>
+        <Header></Header>
     </div>
   )
 }
