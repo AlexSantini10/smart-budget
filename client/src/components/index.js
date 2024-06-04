@@ -3,11 +3,13 @@ import Logo from "./Logo";
 import LogoAndTitle from "./LogoAndTitle";
 import DropDown from "./DropDown";
 import PrimaryButton from "./PrimaryButton";
+import OutlinedButton from "./OutlinedButton";
 
 export { 
     TextInput, 
     Logo, 
     LogoAndTitle, 
     DropDown, 
-    PrimaryButton 
+    PrimaryButton,
+    OutlinedButton
 };
