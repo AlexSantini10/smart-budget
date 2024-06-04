@@ -19,13 +19,13 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{
              flexGrow: 1, 
              color: "#FFF",
-            textAlign: "center",
-            fontFamily: "Roboto",
-            fontSize: "30px",
-            fontStyle: "normal",
-            fontWeight: 600,
-            lineHeight: "140%", /* oppure "28px" */
-            letterSpacing: "-0.4px"
+             textAlign: "center",
+             fontFamily: "Roboto",
+             fontSize: "30px",
+             fontStyle: "normal",
+             fontWeight: 600,
+             lineHeight: "140%", /* oppure "28px" */
+             letterSpacing: "-0.4px"
             }}>
             SmartBudget
           </Typography>
