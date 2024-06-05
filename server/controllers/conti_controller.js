@@ -4,14 +4,12 @@ const {BadRequestError, NotFoundError, UnauthorizedError} = require('../errors')
 
 const getConti = async (req, res) => {
     const user_id = req.user.ID;
-    console.log(user_id);
     const conti = await get_conti(user_id);
     res.status(StatusCodes.OK).json(conti);
 }
 
 const getConto = async (req, res) => {
     const conto_id = req.params.id;
-    console.log(conto_id);
     const conto = await get_conto(conto_id);
     if (!conto) {
         throw new NotFoundError('Conto not found');

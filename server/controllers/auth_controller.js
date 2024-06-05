@@ -1,6 +1,6 @@
 const StatusCodes = require('http-status-codes');
 const attachCookie = require('../utils/attachCookie.js');
-const {user_exists, get_user_by_email, create_user, authenticate_user, edit_user} = require('../db/users.js');
+const {user_exists, get_user_by_email, create_user, authenticate_user, edit_user, edit_password, get_user_by_id} = require('../db/users.js');
 const {generate_password_sha2_256} = require('../db/utils.js');
 const {createJWT} = require('../utils/createJWT.js');
 
@@ -72,6 +72,7 @@ const login = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const {email, nome, cognome} = req.body;
+    const user_id = req.user.ID;
 
     if (!email && !nome && !cognome) {
         throw new BadRequestError('Please provide some values to update');
@@ -91,7 +92,7 @@ const updateUser = async (req, res) => {
         data_to_update.cognome = cognome;
     }
 
-    await edit_user(req.user.email, data_to_update);
+    await edit_user(user_id, data_to_update);
 
     res.status(StatusCodes.OK).json({
         user: {
@@ -99,6 +100,21 @@ const updateUser = async (req, res) => {
             cognome: cognome || user.cognome,
             nome: nome || user.nome
         }
+    });
+}
+
+const updatePassword = async (req, res) => {
+    const {password} = req.body;
+    const user_id = req.user.ID;
+
+    if (!password) {
+        throw new BadRequestError('Please provide a password');
+    }
+
+    await edit_password(user_id, password);
+
+    res.status(StatusCodes.OK).json({
+        message: 'Password updated'
     });
 }
 
@@ -129,7 +145,7 @@ const logout = async (req, res) => {
     });
 
     res.status(StatusCodes.OK).json({
-        msg: 'Logged out'
+        message: 'Logged out'
     });
 }
 
@@ -137,6 +153,7 @@ module.exports = {
     register,
     login,
     updateUser,
+    updatePassword,
     getCurrentUser,
     logout
 };

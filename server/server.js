@@ -29,6 +29,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler.js');
 // TODO: inserire i routers
 const auth_routes = require('./routes/auth_routes');
 const conti_routes = require('./routes/conti_routes');
+const categorie_routes = require('./routes/categorie_routes');
 
 const app = express();
 
@@ -61,6 +62,7 @@ app.use(cookieParser());
 // TODO: inserire le routes
 app.use('/api/v1/auth', auth_routes);
 app.use('/api/v1/conti', conti_routes);
+app.use('/api/v1/categorie', categorie_routes);
 
 // middleware use
 app.use(notFoundMiddleware);

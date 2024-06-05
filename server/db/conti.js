@@ -69,6 +69,11 @@ const edit_conto = async (conto_id, data_to_update) => {
 }
 
 const delete_conto = async (conto_id) => {
+    let conto = await get_conto(conto_id);
+    if (!conto) {
+        throw new Error('Conto not found');
+    }
+
     let pool = await connect();
 
     let result = await pool.request()

@@ -23,6 +23,7 @@ const sql_order_files = [
     "init_conti.sql",
     "init_categorie.sql",
     "init_transazioni.sql",
+    "triggers.sql"
 ];
 
 // Funzione per eseguire i file SQL
