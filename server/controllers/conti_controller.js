@@ -1,5 +1,5 @@
 const StatusCodes = require('http-status-codes');
-const {get_conti, get_conto, create_conto, edit_conto, delete_conto} = require('../db/conti.js');
+const {get_conti, get_conto, create_conto, edit_conto, delete_conto, get_saldo, get_saldo_totale} = require('../db/conti.js');
 const {BadRequestError, NotFoundError, UnauthorizedError} = require('../errors');
 
 const getConti = async (req, res) => {
@@ -78,4 +78,36 @@ const deleteConto = async (req, res) => {
     res.status(StatusCodes.OK).send({message: 'Conto deleted'});
 }
 
-module.exports = {getConti, getConto, createConto, editConto, deleteConto};
+const getSaldo = async (req, res) => {
+    const user_id = req.user.ID;
+    const conto_id = req.params.id;
+    const conto = await get_conto(conto_id);
+
+    if (!conto) {
+        throw new NotFoundError('Conto not found');
+    }
+
+    if (conto.id_utente !== user_id) {
+        throw new UnauthorizedError('You are not authorized to access this resource');
+    }
+
+    const saldo = await get_saldo(conto_id);
+
+    res.status(StatusCodes.OK).json(saldo);
+}
+
+const getSaldoTotale = async (req, res) => {
+    const user_id = req.user.ID;
+    const saldo = await get_saldo_totale(user_id);
+    res.status(StatusCodes.OK).json(saldo);
+}
+
+module.exports = {
+    getConti, 
+    getConto, 
+    createConto, 
+    editConto, 
+    deleteConto,
+    getSaldo,
+    getSaldoTotale
+};

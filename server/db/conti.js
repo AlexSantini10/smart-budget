@@ -84,11 +84,38 @@ const delete_conto = async (conto_id) => {
     return result;
 }
 
+const get_saldo = async (conto_id) => {
+    let pool = await connect();
+
+    let result = await pool.request()
+        .input('conto_id', conto_id)
+        .query('SELECT saldo FROM conti WHERE ID = @conto_id');
+
+    pool.close();
+    return result.recordset[0].saldo;
+}
+
+const get_saldo_totale = async (user_id) => {
+    let pool = await connect();
+
+    let result = await pool.request()
+        .input('user_id', user_id)
+        .query(`
+            SELECT SUM(saldo) as saldo_totale
+            FROM conti
+            WHERE id_utente = @user_id
+        `);
+    
+    pool.close();
+    return result.recordset[0].saldo_totale;
+}
 
 module.exports = {
     get_conti,
     get_conto,
     create_conto,
     edit_conto,
-    delete_conto
+    delete_conto,
+    get_saldo,
+    get_saldo_totale
 }
