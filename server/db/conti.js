@@ -110,6 +110,32 @@ const get_saldo_totale = async (user_id) => {
     return result.recordset[0].saldo_totale;
 }
 
+const get_saldo_at_date = async (conto_id, data) => {
+    let pool = await connect();
+
+    // Somma di tutti i movimenti fino a quella data (1 = entrata, 2 = uscita, 3 = trasferimento)
+    let somma_entrate = await pool.request()
+        .input('conto_id', conto_id)
+        .input('data', data)
+        .query(`
+            SELECT SUM(importo) as somma_entrate
+            FROM transazioni
+            WHERE id_conto_1 = @conto_id AND tipo_movimento = 1 AND data <= @data
+        `);
+
+    let somma_uscite = await pool.request()
+        .input('conto_id', conto_id)
+        .input('data', data)
+        .query(`
+            SELECT SUM(importo) as somma_uscite
+            FROM transazioni
+            WHERE id_conto_1 = @conto_id AND tipo_movimento = 2 AND data <= @data
+        `);
+
+    pool.close();
+    return somma_entrate.recordset[0].somma_entrate - somma_uscite.recordset[0].somma_uscite;
+}
+
 module.exports = {
     get_conti,
     get_conto,
@@ -117,5 +143,6 @@ module.exports = {
     edit_conto,
     delete_conto,
     get_saldo,
-    get_saldo_totale
+    get_saldo_totale,
+    get_saldo_at_date
 }

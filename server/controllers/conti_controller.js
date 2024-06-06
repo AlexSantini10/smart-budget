@@ -1,5 +1,5 @@
 const StatusCodes = require('http-status-codes');
-const {get_conti, get_conto, create_conto, edit_conto, delete_conto, get_saldo, get_saldo_totale} = require('../db/conti.js');
+const {get_conti, get_conto, create_conto, edit_conto, delete_conto, get_saldo, get_saldo_totale, get_saldo_at_date} = require('../db/conti.js');
 const {BadRequestError, NotFoundError, UnauthorizedError} = require('../errors');
 
 const getConti = async (req, res) => {
@@ -102,6 +102,36 @@ const getSaldoTotale = async (req, res) => {
     res.status(StatusCodes.OK).json(saldo);
 }
 
+const getSaldoAtDate = async (req, res) => {
+    const user_id = req.user.ID;
+    const conto_id = req.params.id;
+    const data = req.params.data;
+
+    if (!data) {
+        throw new BadRequestError('Please provide a date');
+    }
+
+    let parsed_data;
+
+    try {
+        parsed_data = new Date(data);
+    } catch (error) {
+        throw new BadRequestError('Invalid date format');
+    }
+
+    const conto = await get_conto(conto_id);
+    if (!conto) {
+        throw new NotFoundError('Conto not found');
+    }
+
+    if (conto.id_utente !== user_id) {
+        throw new UnauthorizedError('You are not authorized to access this resource');
+    }
+
+    const saldo = await get_saldo_at_date(conto_id, data);
+    res.status(StatusCodes.OK).json(saldo);
+}
+
 module.exports = {
     getConti, 
     getConto, 
@@ -109,5 +139,6 @@ module.exports = {
     editConto, 
     deleteConto,
     getSaldo,
-    getSaldoTotale
+    getSaldoTotale,
+    getSaldoAtDate
 };
