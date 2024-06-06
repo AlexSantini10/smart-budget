@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "ef29c055-124e-4d34-bc0e-72f7349b7673",
+		"name": "Conti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15268068"
+	},
+	"item": [
+		{
+			"name": "Get conti",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/conti",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get saldo totale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/saldo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"saldo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get saldo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/saldo/0",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"saldo",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get saldo passato",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/saldo/1/2024-06-10",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"saldo",
+						"1",
+						"2024-06-10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get conto singolo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/5",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create conto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"TEST\",\r\n    \"saldo\":100,\r\n    \"valuta\":\"EUR\",\r\n    \"inclusione_statistiche\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/conti",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit conto",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"BANANA\",\r\n    \"valuta\":\"USD\",\r\n    \"saldo\":0,\r\n    \"inclusione_statistiche\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/3",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete conto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/conti/4",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"conti",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

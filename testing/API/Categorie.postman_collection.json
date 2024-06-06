@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "d490f386-8735-4861-a803-cba29afc6378",
+		"name": "Categorie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15268068"
+	},
+	"item": [
+		{
+			"name": "Get categorie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/categorie",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"categorie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get categoria singola",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/categorie/3",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"categorie",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create categoria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"TESTCATEgoGORIA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/categorie",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"categorie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit categoria",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"BANANATESTMODIFICA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/categorie/11",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"categorie",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete categoria",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/categorie/11",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"categorie",
+						"11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "e0903584-ac83-43cb-8940-637d561cdfa2",
+		"name": "Transazioni",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15268068"
+	},
+	"item": [
+		{
+			"name": "Get transazioni",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/transazioni",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"transazioni"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get transazione singola",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/transazioni/2",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"transazioni",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create transazione",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"importo\":9900,\r\n    \"nome\":\"CIAO IO SONO UN TEST\",\r\n    \"data\":\"2024-06-07\",\r\n    \"ora\":\"00:48\",\r\n    \"tipo_movimento\":1,\r\n    \"id_categoria\":1,\r\n    \"id_conto_1\":1,\r\n    \"id_conto_2\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/transazioni",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"transazioni"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit transazione",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"importo\":9900,\r\n    \"nome\":\"CIAO IO SONO UN TEST\",\r\n    \"data\":\"2024-12-07\",\r\n    \"ora\":\"00:48\",\r\n    \"tipo_movimento\":1,\r\n    \"id_categoria\":1,\r\n    \"id_conto_1\":1,\r\n    \"id_conto_2\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/transazioni/10",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"transazioni",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete transazione",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/transazioni/10",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"transazioni",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
