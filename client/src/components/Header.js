@@ -12,8 +12,8 @@ import ProfileImage from './ProfileImage';
 
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1,}}>
-      <AppBar position="fixed" sx={{background: "#38A0FF" }}>
+    //<Box sx={{ flexGrow: 1,}}>
+      <AppBar /*position="fixed"*/ sx={{position: 'relative', background: "#38A0FF", boxShadow: 'none' }}>
         <Toolbar>
         <Button><OptionsIcon/></Button> 
           <Typography variant="h6" component="div" sx={{
@@ -32,6 +32,6 @@ export default function Header() {
           <ProfileImage/>
         </Toolbar>
       </AppBar>
-    </Box>
+    //</Box>
   );
 }

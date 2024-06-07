@@ -5,6 +5,7 @@ import TextInput from "./TextInput";
 import Logo from "./Logo";
 import OptionsIcon from "./OptionsIcon";
 import ProfileImage from "./ProfileImage";
+import MyIcon from "./MyIcon";
 
 import LogoAndTitle from "./LogoAndTitle";
 import DropDown from "./DropDown";
@@ -16,19 +17,21 @@ import OutlinedButton from "./OutlinedButton";
 import PulsanteConfermaAzzurro from "./PulsanteConfermaAzzurro";
 import PulsanteConfermaRosso from "./PulsanteConfermaRosso";
 import PulsanteAnnulla from "./PulsanteAnnulla";
-import CestinoElimina from "./CestinoElimina";
-import PennaModifica from "./PennaModifica";
+import PulsanteImmagine from "./PulsanteImmagine";
 
-
+/*
+    Elementi Complessi
+*/
 import Header from "./Header";
+import NavBar from "./NavBar";
+import TopArea from "./TopArea";
 
 export { 
     TextInput, 
     Logo, 
     OptionsIcon,
     ProfileImage,
-    CestinoElimina,
-    PennaModifica,
+    PulsanteImmagine,
     LogoAndTitle, 
     DropDown, 
     PrimaryButton,
@@ -37,4 +40,7 @@ export {
     PulsanteConfermaRosso,
     PulsanteAnnulla,
     Header,
+    NavBar,
+    MyIcon,
+    TopArea,
 };
