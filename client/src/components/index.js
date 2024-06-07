@@ -25,6 +25,8 @@ import PulsanteImmagine from "./PulsanteImmagine";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import TopArea from "./TopArea";
+import MyPaper from "./MyPaper";
+import PaperList from "./PaperList";
 
 export { 
     TextInput, 
@@ -43,4 +45,6 @@ export {
     NavBar,
     MyIcon,
     TopArea,
+    MyPaper,
+    PaperList,
 };
