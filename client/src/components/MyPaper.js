@@ -9,13 +9,11 @@ export default function MyPaper({ label="Labello", label2=<div>&nbsp;</div>,
     return (
         <Paper
             elevation={4}
-            sx={{
+            style={{
                 width: "80%",
                 height: "70px",
                 maxHeight: "70px",
-                //border: "1px solid black",
-                //dropShadow: "0px 4px 4px rgba(0, 0, 0, 0.3)",
-                marginTop: "20px",
+                marginBottom: "10px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
