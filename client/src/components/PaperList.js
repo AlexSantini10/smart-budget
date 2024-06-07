@@ -5,22 +5,24 @@ export default function PaperList() {
   return (
     <div style={{ 
       display: 'flex', 
+      position: 'sticky',
       flexDirection: 'column', 
+      margin: 'auto',
       alignItems: 'center',
       justifyContent: 'center',
-      width: '100%',
-      maxHeight: '40%',
-      overflowY: 'auto',
+      width: '95%',
+      overflowY: 'scroll',
+      marginTop: '10vh'
     }}>
+      <MyPaper label2="Cacca"/>
+      <MyPaper />
+      <MyPaper label2="Cacca"/>
       <MyPaper />
       <MyPaper />
       <MyPaper />
+      <MyPaper label2="Cacca"/>
       <MyPaper />
-      <MyPaper />
-      <MyPaper />
-      <MyPaper />
-      <MyPaper />
-      <MyPaper />
+      <MyPaper label2="Cacca"/>
       <MyPaper />
       <MyPaper />
       <MyPaper />

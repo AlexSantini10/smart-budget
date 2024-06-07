@@ -17,22 +17,22 @@ export default function NavBar() {
             background: "#38A0FF",
             color: "#FFF",
             }} value={value} onChange={handleChange}>
-        <BottomNavigationAction sx = {{color: "#FFF"}}
+        <BottomNavigationAction sx = {{color: "#FFF !important"}}
             label="Home"
             value="Home"
             icon={<MyIcon Img="Home.svg" sx={{}}/>}
         />
-        <BottomNavigationAction sx = {{color: "#FFF"}}
+        <BottomNavigationAction sx = {{color: "#FFF !important"}}
             label="Transazioni"
             value="Transazioni"
             icon={<MyIcon Img="Transazioni.svg" sx={{}}/>}
         />
-        <BottomNavigationAction sx = {{color: "#FFF"}}
+        <BottomNavigationAction sx = {{color: "#FFF !important"}}
             label="Conti"
             value="Conti"
             icon={<MyIcon Img="Conti.svg" sx={{}}/>}
         />
-        <BottomNavigationAction sx = {{color: "#FFF"}}
+        <BottomNavigationAction sx = {{color: "#FFF !important"}}
         label="Statistiche"
         value="Statistiche"
         icon={<MyIcon Img="Statistiche.svg" sx={{}}/>} />

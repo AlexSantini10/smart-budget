@@ -2,9 +2,10 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import MyIcon from './MyIcon';
 
-const PulsanteImmagine = ({ Img }) => {
+const PulsanteImmagine = ({ Img, action }) => {
+
   return (
-    <Button>
+    <Button onClick={action}>
       <MyIcon Img={Img}/>
     </Button>
   );

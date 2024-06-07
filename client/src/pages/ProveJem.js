@@ -6,12 +6,14 @@ const ProveJem = () => {
   return (
     <div style={{ width: "60vh", height: "100vh", margin:'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
       <TopArea/>
-      <PaperList />
+      <PaperList/>
       <div style={{backgroundColor: '#FFF', border: "1px solid black", display: 'flex', flexDirection: 'row', justifyContent: 'space-between', 
         width: '100%', 
         height:'10%',
+        position: 'relative',
+        bottom: '0',
       }}>
-      <OutlinedButton sx={{}} labelText="+ Aggiungi" />
+      <OutlinedButton sx={{width: '150vw'}} labelText="+ Aggiungi" />
       </div>
     </div>
   )
