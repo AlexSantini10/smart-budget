@@ -25,6 +25,7 @@ import PulsanteImmagine from "./PulsanteImmagine";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import TopArea from "./TopArea";
+import TornaAllaHome from "./TornaAllaHome";
 import MyPaper from "./MyPaper";
 import PaperList from "./PaperList";
 
@@ -45,6 +46,7 @@ export {
     NavBar,
     MyIcon,
     TopArea,
+    TornaAllaHome,
     MyPaper,
     PaperList,
 };
