@@ -29,6 +29,7 @@ import TornaAllaHome from "./TornaAllaHome";
 import MyPaper from "./MyPaper";
 import PaperList from "./PaperList";
 import ButtonArea from "./ButtonArea";
+import TemporaryDrawer from "./TemporaryDrawer";
 
 export { 
     TextInput, 
@@ -50,5 +51,6 @@ export {
     TornaAllaHome,
     MyPaper,
     PaperList,
-    ButtonArea
+    ButtonArea,
+    TemporaryDrawer
 };

@@ -9,13 +9,14 @@ import { Menu } from '@mui/material';
 import Logo from './Logo';
 import OptionsIcon from './OptionsIcon';
 import ProfileImage from './ProfileImage';
+import TemporaryDrawer from './TemporaryDrawer';
 
 export default function Header() {
   return (
     //<Box sx={{ flexGrow: 1,}}>
       <AppBar /*position="fixed"*/ sx={{position: 'relative', background: "#38A0FF", boxShadow: 'none' }}>
         <Toolbar>
-        <Button><OptionsIcon/></Button> 
+        <TemporaryDrawer/>
           <Typography variant="h6" component="div" sx={{
              flexGrow: 1, 
              color: "#FFF",

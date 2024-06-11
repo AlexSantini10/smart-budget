@@ -1,8 +1,12 @@
 import * as React from 'react';
 import MyPaper from './MyPaper';
 import Box from '@mui/material/Box';
+import PulsanteImmagine from './PulsanteImmagine';
 
-export default function PaperList() {
+const testFirstLabels = ["1Label1", "2Label1", "3Label1", "4Label1", "5Label1", "6Label1", "7Label1", "8Label1", "9Label1", "10Label1", "11Label1", "12Label1", "13Label1", "terzultimoLabel1", "penultimoLabel1", "ultimoLabel1"];
+const testSecondLabels = ["1Label2", "2Label2", "3Label2", "4Label2", "5Label2", "6Label2", "7Label2", "8Label2", "9Label2", "10Label2", "11Label2", "12Label2", "13Label2", "terzultimoLabel2", "penultimoLabel2", "ultimoLabel2"];
+
+export default function PaperList({firstLabels = testFirstLabels, secondLabels = testSecondLabels}) { // firstLabels e secondLabels sono due array di stringhe
   return (
     <Box component="div" sx={{ 
       position: 'relative',
@@ -15,22 +19,11 @@ export default function PaperList() {
       flexDirection: 'column',
       alignItems: 'center',
      }}>
-      <MyPaper label2="1"/>
-      <MyPaper label2="2"/>
-      <MyPaper label2="3"/>
-      <MyPaper label2="4"/>
-      <MyPaper label2="5"/>
-      <MyPaper label2="6"/>
-      <MyPaper label2="7"/>
-      <MyPaper label2="8"/>
-      <MyPaper label2="9"/>
-      <MyPaper label2="10"/>
-      <MyPaper label2="11"/>
-      <MyPaper label2="12"/>
-      <MyPaper label2="13"/>
-      <MyPaper label2="terzultimo"/>
-      <MyPaper label2="penultimo"/>
-      <MyPaper label2="ultimo"/>
+      {
+      firstLabels.map((label, index) => (
+        <MyPaper key={label} label={label} label2={secondLabels[index]} componentA={index % 2 === 0 ? <div/> : <PulsanteImmagine Img="PennaModifica.svg"/>}/>
+      ))
+      }
     </Box>
   );
 }
