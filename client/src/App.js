@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { LandingPage, Login, ProveJem } from './pages';
+import { LandingPage, Login, ProveJem, HomePage } from './pages';
 
 const App = () => {
   return (
@@ -10,6 +10,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/provejem" element={<ProveJem />} />
         <Route path="/" element={<LandingPage />} /> {/* Redirect a registrazione di default */}
+        <Route path="/home" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );

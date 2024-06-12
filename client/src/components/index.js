@@ -30,6 +30,7 @@ import MyPaper from "./MyPaper";
 import PaperList from "./PaperList";
 import ButtonArea from "./ButtonArea";
 import TemporaryDrawer from "./TemporaryDrawer";
+import SaldoHome from "./SaldoHome";
 
 export { 
     TextInput, 
@@ -52,5 +53,6 @@ export {
     MyPaper,
     PaperList,
     ButtonArea,
-    TemporaryDrawer
+    TemporaryDrawer,
+    SaldoHome
 };

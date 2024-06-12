@@ -29,10 +29,3 @@ export default function PaperList({firstLabels = testFirstLabels, secondLabels =
     </Box>
   );
 }
-/*
-<div style={{ 
-      position: 'sticky',
-      top: '0',
-      marginTop: 0,
-    }}>
-*/
