@@ -36,10 +36,13 @@ const Register = () => {
 
   useEffect(() => {
     getCurrentUser();
+  }, []);
+
+  useEffect(() => {
     if (user && isUserLoading) {
       navigate('/home');
     }
-  }, [user, navigate]);
+  }, [user]);
 
 
   useEffect(() => {
