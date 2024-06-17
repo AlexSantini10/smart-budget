@@ -64,7 +64,8 @@ const reducer = (state, action) => {
     if (action.type === REGISTER_USER_BEGIN) {
         return {
             ...state,
-            isUserLoading: true
+            isUserLoading: true,
+            isApplicationLoading: true
         };
     }
 
@@ -75,7 +76,8 @@ const reducer = (state, action) => {
             user: action.payload.user,
             showAlert: true,
             alertText: 'Registrazione avvenuta con successo',
-            alertType: 'success'
+            alertType: 'success',
+            isApplicationLoading: false
         };
     }
 
@@ -85,14 +87,16 @@ const reducer = (state, action) => {
             isUserLoading: false,
             showAlert: true,
             alertText: action.payload.alertText,
-            alertType: 'error'
+            alertType: action.payload.alertType,
+            isApplicationLoading: false
         };
     }
 
     if (action.type === LOGIN_USER_BEGIN) {
         return {
             ...state,
-            isUserLoading: true
+            isUserLoading: true,
+            isApplicationLoading: true
         };
     }
 
@@ -103,7 +107,8 @@ const reducer = (state, action) => {
             user: action.payload.user,
             showAlert: true,
             alertText: 'Accesso effettuato con successo',
-            alertType: 'success'
+            alertType: 'success',
+            isApplicationLoading: false
         };
     }
 
@@ -113,7 +118,8 @@ const reducer = (state, action) => {
             isUserLoading: false,
             showAlert: true,
             alertText: action.payload.alertText,
-            alertType: 'error'
+            alertType: 'error',
+            isApplicationLoading: false
         };
     }
 

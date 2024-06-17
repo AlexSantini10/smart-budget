@@ -80,8 +80,8 @@ const AppProvider = ({ children }) => {
         return Promise.reject(error);
     });
 
-    const displayAlert = () => {
-        dispatch({type: DISPLAY_ALERT});
+    const displayAlert = (alertText, alertType) => {
+        dispatch({type: REGISTER_USER_ERROR, payload: {alertText, alertType}});
     
         clearAlert();
     }
@@ -100,11 +100,9 @@ const AppProvider = ({ children }) => {
 
             const {user} = response.data;
 
-            console.log(response);
-
             dispatch({type: REGISTER_USER_SUCCESS, payload: {user: response.data.user}});
         } catch (error) {
-            dispatch({type: REGISTER_USER_ERROR, payload: {alertText: error.response.data.error}});
+            dispatch({type: REGISTER_USER_ERROR, payload: {alertText: error.response.data.msg, alertType: 'error'}});
         }
         
         clearAlert();
