@@ -44,6 +44,7 @@ import {
     DELETE_CATEGORIA_SUCCESS,
     DELETE_CATEGORIA_ERROR
 } from './actions';
+import { initialState } from './appContext';
 
 const reducer = (state, action) => {
 
@@ -155,8 +156,10 @@ const reducer = (state, action) => {
 
     if (action.type === LOGOUT_USER) {
         return {
-            ...state,
-            user: null
+            ...initialState,
+            isUserSetupLoading: false,
+            isUserLoading: false,
+            isApplicationLoading: false,
         };
     }
 

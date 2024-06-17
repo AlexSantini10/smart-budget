@@ -1,5 +1,6 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 import reducer from "./reducer";
 import {
@@ -173,7 +174,8 @@ const AppProvider = ({ children }) => {
     }
 
     const logoutUser = async () => {
-        await authAxios.get('/auth/logout');
+        await authAxios.get('/logout');
+        Cookies.remove('token');
         dispatch({type: LOGOUT_USER});
     }
 
@@ -185,7 +187,8 @@ const AppProvider = ({ children }) => {
                                     clearAlert,
                                     registerUser,
                                     loginUser,
-                                    getCurrentUser
+                                    getCurrentUser,
+                                    logoutUser
                                     }}>
             {children}
         </AppContext.Provider>

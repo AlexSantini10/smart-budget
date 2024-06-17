@@ -6,7 +6,7 @@ import MyAlert from '../components/MyAlert'
 
 const Login = () => {
   const navigate = useNavigate();
-  const {user, isUserLoading, displayAlert, alertText, alertType, loginUser} = useAppContext();
+  const {user, isUserLoading, displayAlert, alertText, alertType, loginUser, getCurrentUser} = useAppContext();
 
   const initialState = {
     email: (user && user.email) || '',
@@ -28,6 +28,16 @@ const Login = () => {
 
     loginUser(values);
   }
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    if (user && isUserLoading) {
+      navigate('/home');
+    }
+  }, [user]);
 
   useEffect(() => {
     if (user) {
