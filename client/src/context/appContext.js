@@ -24,6 +24,9 @@ import {
     GET_SALDO_BEGIN,
     GET_SALDO_SUCCESS,
     GET_SALDO_ERROR,
+    GET_TRANSACTIONS_BEGIN,
+    GET_TRANSACTIONS_SUCCESS,
+    GET_TRANSACTIONS_ERROR,
     CREATE_TRANSACTION_BEGIN,
     CREATE_TRANSACTION_SUCCESS,
     CREATE_TRANSACTION_ERROR,
@@ -82,6 +85,11 @@ const AppProvider = ({ children }) => {
 
     const contiAxios = axios.create({
         baseURL: 'http://localhost:5000/api/v1/conti',
+        withCredentials: true
+    });
+
+    const transactionsAxios = axios.create({
+        baseURL: 'http://localhost:5000/api/v1/transazioni',
         withCredentials: true
     });
 
@@ -219,6 +227,26 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const getTransazioni = async () => {
+        dispatch({type: GET_TRANSACTIONS_BEGIN});
+
+        try {
+            const response = await transactionsAxios.get('/');
+
+            const transazioni = response.data;
+
+            dispatch({type: GET_TRANSACTIONS_SUCCESS, payload: {transazioni}});
+        } catch (error) {
+            if (error.response.status === 401) {
+                logoutUser();
+            } else {
+                dispatch({type: GET_TRANSACTIONS_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+        
+        clearAlert();
+    }
+
     const logoutUser = async () => {
         await authAxios.get('/logout');
         Cookies.remove('token');
@@ -235,7 +263,8 @@ const AppProvider = ({ children }) => {
                                     loginUser,
                                     getCurrentUser,
                                     logoutUser,
-                                    getSaldo
+                                    getSaldo,
+                                    getTransazioni
                                     }}>
             {children}
         </AppContext.Provider>

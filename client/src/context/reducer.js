@@ -16,6 +16,9 @@ import {
     DELETE_USER_BEGIN,
     DELETE_USER_SUCCESS,
     DELETE_USER_ERROR,
+    GET_TRANSACTIONS_BEGIN,
+    GET_TRANSACTIONS_SUCCESS,
+    GET_TRANSACTIONS_ERROR,
     CREATE_TRANSACTION_BEGIN,
     CREATE_TRANSACTION_SUCCESS,
     CREATE_TRANSACTION_ERROR,
@@ -221,13 +224,6 @@ const reducer = (state, action) => {
         };
     }
 
-    if (action.type === CREATE_TRANSACTION_BEGIN) {
-        return {
-            ...state,
-            isApplicationLoading: true
-        };
-    }
-
     if (action.type === GET_SALDO_BEGIN) {
         return {
             ...state,
@@ -251,6 +247,39 @@ const reducer = (state, action) => {
             showAlert: true,
             alertText: action.payload.alertText,
             alertType: 'error'
+        };
+    }
+
+    if (action.type === GET_TRANSACTIONS_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === GET_TRANSACTIONS_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            transazioni: action.payload.transazioni,
+        };
+    }
+
+    if (action.type === GET_TRANSACTIONS_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
+
+    if (action.type === CREATE_TRANSACTION_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
         };
     }
 
