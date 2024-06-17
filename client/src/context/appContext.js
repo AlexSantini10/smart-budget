@@ -96,6 +96,11 @@ const AppProvider = ({ children }) => {
         withCredentials: true
     });
 
+    const categorieAxios = axios.create({
+        baseURL: 'http://localhost:5000/api/v1/categorie',
+        withCredentials: true
+    });
+
     authAxios.interceptors.request.use((response) => {
         return response;
     }, (error) => {
@@ -185,7 +190,7 @@ const AppProvider = ({ children }) => {
             dispatch({type: UPDATE_USER_SUCCESS, payload: {user: response.data}});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                //logoutUser();
             } else {
                 dispatch({type: UPDATE_USER_ERROR, payload: {alertText: error.response.data.error}});
             }
@@ -221,7 +226,7 @@ const AppProvider = ({ children }) => {
             dispatch({type: GET_SALDO_SUCCESS, payload: {saldo, saldoPassato}});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                //logoutUser();
             } else {
                 dispatch({type: GET_SALDO_ERROR, payload: {alertText: error.response.data.error}});
             }
@@ -249,10 +254,16 @@ const AppProvider = ({ children }) => {
                 }
             }
 
+            // Per ogni transazione devo recuperare i nomi delle transazioni
+            for (let i = 0; i < transazioni.length; i++) {
+                const responseCategoria = await categorieAxios.get(`/${transazioni[i].id_categoria}`);
+                transazioni[i].nomeCategoria = responseCategoria.data.nome;
+            }
+
             dispatch({type: GET_TRANSACTIONS_SUCCESS, payload: {transazioni}});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                //logoutUser();
             } else {
                 dispatch({type: GET_TRANSACTIONS_ERROR, payload: {alertText: error.response.data.error}});
             }
@@ -272,7 +283,7 @@ const AppProvider = ({ children }) => {
             dispatch({type: GET_CONTI_SUCCESS, payload: {conti}});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                //logoutUser();
             } else {
                 dispatch({type: GET_CONTI_ERROR, payload: {alertText: error.response.data.error}});
             }
