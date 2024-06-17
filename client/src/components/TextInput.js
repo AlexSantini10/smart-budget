@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({labelText, textType}) => {
-    const [value, setValue] = useState('');
+const TextInput = ({labelText, textType, textValue, onChange}) => {
+    const [value, setValue] = useState(textValue);
 
     const handleChange = (event) => {
         setValue(event.target.value);
+
+        if (onChange)
+            onChange(labelText.toLowerCase(), event.target.value);
     }
 
     return (

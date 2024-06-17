@@ -1,9 +1,12 @@
 import {
     DISPLAY_ALERT,
     CLEAR_ALERT,
-    SETUP_USER_BEGIN,
-    SETUP_USER_SUCCESS,
-    SETUP_USER_ERROR,
+    REGISTER_USER_BEGIN,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    LOGIN_USER_BEGIN,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_ERROR,
     LOGOUT_USER,
     UPDATE_USER_BEGIN,
     UPDATE_USER_SUCCESS,
@@ -58,26 +61,56 @@ const reducer = (state, action) => {
         }
     }
 
-    if (action.type === SETUP_USER_BEGIN) {
-        return {...state, isUserLoading: true};
+    if (action.type === REGISTER_USER_BEGIN) {
+        return {
+            ...state,
+            isUserLoading: true
+        };
     }
 
-    if (action.type === SETUP_USER_SUCCESS) {
+    if (action.type === REGISTER_USER_SUCCESS) {
         return {
-            ...state, 
-            isUserLoading: false, 
+            ...state,
+            isUserLoading: false,
             user: action.payload.user,
-            showAlert: false,
-            alertText: 'Utente creato con successo',
+            showAlert: true,
+            alertText: 'Registrazione avvenuta con successo',
             alertType: 'success'
         };
     }
 
-    if (action.type === SETUP_USER_ERROR) {
+    if (action.type === REGISTER_USER_ERROR) {
         return {
-            ...state, 
-            isUserLoading: false, 
-            user: null,
+            ...state,
+            isUserLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
+    if (action.type === LOGIN_USER_BEGIN) {
+        return {
+            ...state,
+            isUserLoading: true
+        };
+    }
+
+    if (action.type === LOGIN_USER_SUCCESS) {
+        return {
+            ...state,
+            isUserLoading: false,
+            user: action.payload.user,
+            showAlert: true,
+            alertText: 'Accesso effettuato con successo',
+            alertType: 'success'
+        };
+    }
+
+    if (action.type === LOGIN_USER_ERROR) {
+        return {
+            ...state,
+            isUserLoading: false,
             showAlert: true,
             alertText: action.payload.alertText,
             alertType: 'error'

@@ -5,9 +5,12 @@ import reducer from "./reducer";
 import {
     DISPLAY_ALERT,
     CLEAR_ALERT,
-    SETUP_USER_BEGIN,
-    SETUP_USER_SUCCESS,
-    SETUP_USER_ERROR,
+    REGISTER_USER_BEGIN,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    LOGIN_USER_BEGIN,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_ERROR,
     LOGOUT_USER,
     UPDATE_USER_BEGIN,
     UPDATE_USER_SUCCESS,
@@ -58,13 +61,13 @@ const initialState = {
     totalPages: 1
 }
 
-const AppContext = React.createContext();
+const AppContext = React.createContext(initialState);
 
 const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const authAxios = axios.create({
-        baseURL: 'api/v1/auth'
+        baseURL: 'http://localhost:5000/api/v1/auth'
     });
 
     authAxios.interceptors.request.use((response) => {
@@ -89,17 +92,19 @@ const AppProvider = ({ children }) => {
         }, 3000);
     }
 
-    const setupUser = async (currentUser) => {
-        dispatch({type: SETUP_USER_BEGIN});
+    const registerUser = async ({nome, cognome, email, password}) => {
+        dispatch({type: REGISTER_USER_BEGIN});
 
         try {
-            const response = await authAxios.post('/register', currentUser);
+            const response = await authAxios.post('/register', {nome, cognome, email, password});
 
             const {user} = response.data;
 
-            dispatch({type: SETUP_USER_SUCCESS, payload: {user: response.data}});
+            console.log(response);
+
+            dispatch({type: REGISTER_USER_SUCCESS, payload: {user: response.data.user}});
         } catch (error) {
-            dispatch({type: SETUP_USER_ERROR, payload: {alertText: error.response.data.error}});
+            dispatch({type: REGISTER_USER_ERROR, payload: {alertText: error.response.data.error}});
         }
         
         clearAlert();
@@ -136,15 +141,15 @@ const AppProvider = ({ children }) => {
                                     dispatch,
                                     displayAlert,
                                     clearAlert,
-                                    setupUser
+                                    registerUser
                                     }}>
             {children}
         </AppContext.Provider>
     );
 }
 
-export const useAppContext = () => {
+const useAppContext = () => {
     return useContext(AppContext);
 }
 
-export { AppContext, AppProvider, initialState };
+export { useAppContext, AppProvider, initialState };
