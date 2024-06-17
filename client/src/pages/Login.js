@@ -57,6 +57,7 @@ const Login = () => {
           <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           <MyAlert message={alertText} severity={alertType} />
           <PrimaryButton  labelText="Login" onClick={handleSubmit} />
+          Non hai un account? <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>Registrati</Link>
       </div>
     </div>
   )

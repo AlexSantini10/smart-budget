@@ -67,6 +67,7 @@ const Register = () => {
           <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           <MyAlert message={alertText} severity={alertType} />
           <PrimaryButton  labelText="Registrati" onClick={handleSubmit} />
+          Già registrato? <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>Login</Link>
       </div>
     </div>
   )

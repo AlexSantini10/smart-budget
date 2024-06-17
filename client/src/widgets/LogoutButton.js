@@ -12,7 +12,7 @@ const LogoutButton = () => {
         logoutUser();
         setTimeout(() => {
             navigate('/');
-        }, 2000);
+        }, 100);
     }
 
   return (
