@@ -235,6 +235,17 @@ const AppProvider = ({ children }) => {
 
             const transazioni = response.data;
 
+            // Per ogni transazione devo recuperare i nomi dei conti
+            for (let i = 0; i < transazioni.length; i++) {
+                const responseConto = await contiAxios.get(`/${transazioni[i].id_conto_1}`);
+                transazioni[i].nomeConto = responseConto.data.nome;
+
+                if (transazioni[i].tipo_movimento === 3) {
+                    const responseConto2 = await contiAxios.get(`/${transazioni[i].id_conto_2}`);
+                    transazioni[i].nomeConto2 = responseConto2.data.nome;
+                }
+            }
+
             dispatch({type: GET_TRANSACTIONS_SUCCESS, payload: {transazioni}});
         } catch (error) {
             if (error.response.status === 401) {
@@ -253,6 +264,25 @@ const AppProvider = ({ children }) => {
         dispatch({type: LOGOUT_USER});
     }
 
+    const deleteTransazione = async (id) => {
+        dispatch({type: DELETE_TRANSACTION_BEGIN});
+
+        try {
+            const response = await transactionsAxios.delete(`/${id}`);
+
+            dispatch({type: DELETE_TRANSACTION_SUCCESS});
+        } catch (error) {
+            if (error.response.status === 401) {
+                logoutUser();
+            } else {
+                dispatch({type: DELETE_TRANSACTION_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+        
+        getTransazioni();
+        clearAlert();
+    }
+
     return (
         <AppContext.Provider value={{
                                     ...state, 
@@ -264,7 +294,8 @@ const AppProvider = ({ children }) => {
                                     getCurrentUser,
                                     logoutUser,
                                     getSaldo,
-                                    getTransazioni
+                                    getTransazioni,
+                                    deleteTransazione
                                     }}>
             {children}
         </AppContext.Provider>

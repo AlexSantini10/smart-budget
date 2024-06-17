@@ -304,6 +304,31 @@ const reducer = (state, action) => {
         };
     }
 
+    if (action.type === DELETE_TRANSACTION_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === DELETE_TRANSACTION_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            transazioni: []
+        }
+    }
+
+    if (action.type === DELETE_TRANSACTION_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
 }
 
 export default reducer;
