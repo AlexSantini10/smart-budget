@@ -157,6 +157,7 @@ const reducer = (state, action) => {
     if (action.type === LOGOUT_USER) {
         return {
             ...initialState,
+            user: null,
             isUserSetupLoading: false,
             isUserLoading: false,
             isApplicationLoading: false,
