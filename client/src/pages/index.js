@@ -1,7 +1,10 @@
-import LandingPage from "./LandingPage";
+import Categorie from "./Categorie";
+import Conti from "./Conti";
+import GestioneProfilo from "./GestioneProfilo";
+import Home from "./Home";
 import Login from "./Login";
-import ProveJem from "./ProveJem";
-import HomePage from "./HomePage";
+import Register from "./Register";
+import Transazioni from "./Transazioni";
+import Error from "./Error";
 
-
-export { LandingPage, Login, ProveJem, HomePage };
+export { Categorie, Conti, GestioneProfilo, Home, Login, Register, Transazioni, Error };

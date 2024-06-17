@@ -1,16 +1,34 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { LandingPage, Login, ProveJem, HomePage } from './pages';
+import {
+  Categorie,
+  Conti,
+  GestioneProfilo,
+  Home,
+  Login,
+  Register,
+  Transazioni,
+  Error
+} from './pages';
+import ProtectedRoute from './pages/ProtectedRoute';
+
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/registrazione" element={<LandingPage />} />
+        <Route path="/" element={<ProtectedRoute></ProtectedRoute>}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/transazioni" element={<Transazioni />} />
+          <Route path="/conti" element={<Conti />} />
+          <Route path="/categorie" element={<Categorie />} />
+          <Route path="/gestione-profilo" element={<GestioneProfilo />} />
+        </Route>
+        
         <Route path="/login" element={<Login />} />
-        <Route path="/provejem" element={<ProveJem />} />
-        <Route path="/" element={<LandingPage />} /> {/* Redirect a registrazione di default */}
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

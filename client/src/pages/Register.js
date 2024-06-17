@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextInput, LogoAndTitle, DropDown, PrimaryButton } from '../components'
 
-const LandingPage = () => {
+const Register = () => {
   return (
     <div style={{ padding: '10px'}}>
       <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px' }}>
@@ -17,4 +17,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default Register
