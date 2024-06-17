@@ -8,16 +8,31 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
 import OptionsIcon from './OptionsIcon';
 import MyIcon from './MyIcon';
-import { ProfileImage } from '.';
+import { Logo, ProfileImage } from '.';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/appContext';
 
 export default function TemporaryDrawer({nome = "Nome",cognome = "Cognome"}) {
   const [open, setOpen] = React.useState(false);
 
+  const {logoutUser} = useAppContext();
+  const navigate = useNavigate();
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  const handleLogout = () => {
+    console.log('Logout');
+    logoutUser();
+    setTimeout(() => {
+        navigate('/');
+    }, 100);
+}
+
 
   const DrawerList = (
     <Box sx={{ width: 250, height:'100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: '#38A0FF' }} role="SideBar" onClick={toggleDrawer(false)}>
@@ -44,8 +59,8 @@ export default function TemporaryDrawer({nome = "Nome",cognome = "Cognome"}) {
         </div>
       </div>
       <List>
-        {['Il mio profilo', 'Categorie', 'Budgets', 'Debiti/Crediti', 'Contatti'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {['Il mio profilo', 'Categorie', 'Budgets', 'Debiti/Crediti', 'Contatti', 'Logout'].map((text, index) => (
+          <ListItem key={text} disablePadding onClick={index == 5 ? handleLogout : undefined}>
             <ListItemButton>
               <ListItemIcon>
                 {
@@ -54,6 +69,7 @@ export default function TemporaryDrawer({nome = "Nome",cognome = "Cognome"}) {
                 index == 2 ? <MyIcon Img="coin.svg"/> :
                 index == 3 ? <MyIcon Img="watch.svg"/> :
                 index == 4 ? <MyIcon Img="Contatti.svg"/> : 
+                index == 5 ? <LogoutIcon /> :
                 <MailIcon />
                 }
               </ListItemIcon>

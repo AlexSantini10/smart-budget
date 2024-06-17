@@ -2,12 +2,14 @@ import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import MyIcon from './MyIcon';
+import { useNavigate } from 'react-router-dom';
 
 export default function TornaAllaHome(defaultValue = "Home") {
-  const [value, setValue] = React.useState('recents');
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    navigate('/home');
   };
 
   return (
@@ -17,7 +19,7 @@ export default function TornaAllaHome(defaultValue = "Home") {
             width: "100%",
             background: "#38A0FF",
             color: "#FFF",
-            }} value={value} onChange={handleChange}>
+            }} onClick={handleClick}>
         <BottomNavigationAction sx = {{color: "#FFF !important"}}
             label="Home"
             value="Home"
