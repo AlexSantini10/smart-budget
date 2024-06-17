@@ -6,10 +6,18 @@ import { useNavigate } from 'react-router-dom'
 import {DropDown, Logo, LogoAndTitle, PrimaryButton, TextInput, OutlinedButton, Header, PulsanteConfermaAzzurro, PulsanteConfermaRosso, PulsanteAnnulla, PulsanteImmagine,
         NavBar, MyIcon, TopArea, PaperList, TornaAllaHome, ButtonArea, SaldoHome} from '../components'
 const Home = () => {
+
+  const {saldo, saldoPassato, getSaldo} = useAppContext();
+
+  useEffect(() => {
+    getSaldo();
+  }
+  , []);
+
   return (
     <div style={{ width: "60vh", height: "100vh", margin:'auto', display: 'flex', flexDirection: 'column'}}>
       <TopArea/>
-      <div style={{height: "15%", position: 'relative', top:0, margin:'auto'}}><SaldoHome saldoAttuale={100} saldoPassato={10} valutaRiferimento={'$'}/></div>
+      <div style={{height: "15%", position: 'relative', top:0, margin:'auto'}}><SaldoHome saldoAttuale={saldo} saldoPassato={saldoPassato} valutaRiferimento={'€'}/></div>
 
       <PaperList sx={{}}/>
 

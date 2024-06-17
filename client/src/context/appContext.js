@@ -21,6 +21,9 @@ import {
     DELETE_USER_BEGIN,
     DELETE_USER_SUCCESS,
     DELETE_USER_ERROR,
+    GET_SALDO_BEGIN,
+    GET_SALDO_SUCCESS,
+    GET_SALDO_ERROR,
     CREATE_TRANSACTION_BEGIN,
     CREATE_TRANSACTION_SUCCESS,
     CREATE_TRANSACTION_ERROR,
@@ -62,7 +65,9 @@ const initialState = {
     transazioni: [],
     conti: [],
     page: 1,
-    totalPages: 1
+    totalPages: 1,
+    saldo: 0,
+    saldoPassato: 0,
 }
 
 const AppContext = React.createContext(initialState);
@@ -72,6 +77,11 @@ const AppProvider = ({ children }) => {
 
     const authAxios = axios.create({
         baseURL: 'http://localhost:5000/api/v1/auth',
+        withCredentials: true
+    });
+
+    const contiAxios = axios.create({
+        baseURL: 'http://localhost:5000/api/v1/conti',
         withCredentials: true
     });
 
@@ -173,6 +183,42 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const getSaldo = async () => {
+        dispatch({type: GET_SALDO_BEGIN});
+
+        try {
+            const response = await contiAxios.get('/saldo');
+
+            const saldo = response.data;
+
+            const fineMesePassato = new Date();
+            fineMesePassato.setDate(0);
+
+            let year = fineMesePassato.getFullYear();
+            let month = fineMesePassato.getMonth() + 1;
+
+            if (month < 10) {
+                month = '0' + month;
+            }
+
+            let day = fineMesePassato.getDate();
+
+            const responsePassato = await contiAxios.get(`/saldoPassato/${year}-${month}-${day}`);
+        
+            const saldoPassato = responsePassato.data;
+
+            dispatch({type: GET_SALDO_SUCCESS, payload: {saldo, saldoPassato}});
+        } catch (error) {
+            if (error.response.status === 401) {
+                logoutUser();
+            } else {
+                dispatch({type: GET_SALDO_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+        
+        clearAlert();
+    }
+
     const logoutUser = async () => {
         await authAxios.get('/logout');
         Cookies.remove('token');
@@ -188,7 +234,8 @@ const AppProvider = ({ children }) => {
                                     registerUser,
                                     loginUser,
                                     getCurrentUser,
-                                    logoutUser
+                                    logoutUser,
+                                    getSaldo
                                     }}>
             {children}
         </AppContext.Provider>

@@ -42,7 +42,10 @@ import {
     UPDATE_CATEGORIA_ERROR,
     DELETE_CATEGORIA_BEGIN,
     DELETE_CATEGORIA_SUCCESS,
-    DELETE_CATEGORIA_ERROR
+    DELETE_CATEGORIA_ERROR,
+    GET_SALDO_BEGIN,
+    GET_SALDO_SUCCESS,
+    GET_SALDO_ERROR
 } from './actions';
 import { initialState } from './appContext';
 
@@ -222,6 +225,32 @@ const reducer = (state, action) => {
         return {
             ...state,
             isApplicationLoading: true
+        };
+    }
+
+    if (action.type === GET_SALDO_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === GET_SALDO_SUCCESS){
+        return {
+            ...state,
+            isApplicationLoading: false,
+            saldo: action.payload.saldo,
+            saldoPassato: action.payload.saldoPassato
+        }
+    }
+
+    if (action.type === GET_SALDO_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
         };
     }
 

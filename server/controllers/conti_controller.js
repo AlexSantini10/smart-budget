@@ -1,5 +1,5 @@
 const StatusCodes = require('http-status-codes');
-const {get_conti, get_conto, create_conto, edit_conto, delete_conto, get_saldo, get_saldo_totale, get_saldo_at_date} = require('../db/conti.js');
+const {get_conti, get_conto, create_conto, get_saldo_totale_passato, edit_conto, delete_conto, get_saldo, get_saldo_totale, get_saldo_at_date} = require('../db/conti.js');
 const {BadRequestError, NotFoundError, UnauthorizedError} = require('../errors');
 
 const getConti = async (req, res) => {
@@ -102,6 +102,27 @@ const getSaldoTotale = async (req, res) => {
     res.status(StatusCodes.OK).json(saldo);
 }
 
+const getSaldoTotalePassato = async (req, res) => {
+    const user_id = req.user.ID;
+    const data = req.params.data;
+
+    if (!data) {
+        throw new BadRequestError('Please provide a date');
+    }
+
+    let parsed_data;
+
+    try {
+        parsed_data = new Date(data);
+    }
+    catch (error) {
+        throw new BadRequestError('Invalid date format (must be in the format YYYY-MM-DD)');
+    }
+
+    const saldo = await get_saldo_totale_passato(user_id, data);
+    res.status(StatusCodes.OK).json(saldo);
+}
+
 const getSaldoAtDate = async (req, res) => {
     const user_id = req.user.ID;
     const conto_id = req.params.id;
@@ -116,7 +137,7 @@ const getSaldoAtDate = async (req, res) => {
     try {
         parsed_data = new Date(data);
     } catch (error) {
-        throw new BadRequestError('Invalid date format');
+        throw new BadRequestError('Invalid date format (must be in the format YYYY-MM-DD)');
     }
 
     const conto = await get_conto(conto_id);
@@ -140,5 +161,6 @@ module.exports = {
     deleteConto,
     getSaldo,
     getSaldoTotale,
-    getSaldoAtDate
+    getSaldoAtDate,
+    getSaldoTotalePassato
 };
