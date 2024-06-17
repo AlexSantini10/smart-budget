@@ -39,7 +39,11 @@ const Home = () => {
 
       let act_ID = transazioni[i].ID;
 
-      act_firstLabels.push(transazioni[i].nome);
+      let actDate = new Date(transazioni[i].data);
+
+      let dataString = actDate.getDate() + "/" + (actDate.getMonth() + 1) + "/" + actDate.getFullYear();
+
+      act_firstLabels.push(transazioni[i].nome + ' - ' + dataString);
       act_secondLabels.push((transazioni[i].tipo_movimento === 1 ? '+' : (transazioni[i].tipo_movimento === 2 ? '-' : '')) + transazioni[i].importo + "€ (" + transazioni[i].nomeConto + (transazioni[i].tipo_movimento === 3 ? " -> " + transazioni[i].nomeConto2 : "") + ")");
       act_componentsA.push(<PulsanteImmagine Img="PennaModifica.svg" action={() => modificaTransazione(act_ID)} />);
       act_componentsB.push(<PulsanteImmagine Img="CestinoElimina.svg" action={() => eliminaTransazione(act_ID)} />);
@@ -55,7 +59,6 @@ const Home = () => {
     , [transazioni]);
 
   const eliminaTransazione = (id) => {
-    // TODO: implementare la chiamata al server per eliminare la transazione
     console.log("Elimino la transazione con id: ", id);
     deleteTransazione(id);
   }

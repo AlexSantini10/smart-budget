@@ -48,7 +48,10 @@ import {
     DELETE_CATEGORIA_ERROR,
     GET_SALDO_BEGIN,
     GET_SALDO_SUCCESS,
-    GET_SALDO_ERROR
+    GET_SALDO_ERROR,
+    GET_CONTI_BEGIN,
+    GET_CONTI_SUCCESS,
+    GET_CONTI_ERROR
 } from './actions';
 import { initialState } from './appContext';
 
@@ -320,6 +323,31 @@ const reducer = (state, action) => {
     }
 
     if (action.type === DELETE_TRANSACTION_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
+    if (action.type === GET_CONTI_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === GET_CONTI_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            conti: action.payload.conti
+        };
+    }
+
+    if (action.type === GET_CONTI_ERROR) {
         return {
             ...state,
             isApplicationLoading: false,

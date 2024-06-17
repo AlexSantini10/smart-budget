@@ -36,6 +36,9 @@ import {
     DELETE_TRANSACTION_BEGIN,
     DELETE_TRANSACTION_SUCCESS,
     DELETE_TRANSACTION_ERROR,
+    GET_CONTI_BEGIN,
+    GET_CONTI_SUCCESS,
+    GET_CONTI_ERROR,
     CREATE_CONTO_BEGIN,
     CREATE_CONTO_SUCCESS,
     CREATE_CONTO_ERROR,
@@ -258,6 +261,26 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const getConti = async () => {
+        dispatch({type: GET_CONTI_BEGIN});
+
+        try {
+            const response = await contiAxios.get('/');
+
+            const conti = response.data;
+
+            dispatch({type: GET_CONTI_SUCCESS, payload: {conti}});
+        } catch (error) {
+            if (error.response.status === 401) {
+                logoutUser();
+            } else {
+                dispatch({type: GET_CONTI_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+        
+        clearAlert();
+    }
+
     const logoutUser = async () => {
         await authAxios.get('/logout');
         Cookies.remove('token');
@@ -283,6 +306,25 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const deleteConto = async (id) => {
+        dispatch({type: DELETE_CONTO_BEGIN});
+
+        try {
+            const response = await contiAxios.delete(`/${id}`);
+
+            dispatch({type: DELETE_CONTO_SUCCESS});
+        } catch (error) {
+            if (error.response.status === 401) {
+                logoutUser();
+            } else {
+                dispatch({type: DELETE_CONTO_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+        
+        getConti();
+        clearAlert();
+    }
+
     return (
         <AppContext.Provider value={{
                                     ...state, 
@@ -295,7 +337,9 @@ const AppProvider = ({ children }) => {
                                     logoutUser,
                                     getSaldo,
                                     getTransazioni,
-                                    deleteTransazione
+                                    deleteTransazione,
+                                    getConti,
+                                    deleteConto
                                     }}>
             {children}
         </AppContext.Provider>
