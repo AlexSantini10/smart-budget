@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = () => {
 
-    if (!values.nome || !values.cognome || !values.email || !values.password) {
+    if (!values.email || !values.password) {
       displayAlert('Tutti i campi sono obbligatori', 'warning');
       return;
     }
@@ -31,10 +31,10 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      displayAlert('Registrazione avvenuta con successo', 'success');
+      displayAlert('Login avvenuto con successo', 'success');
 
       setTimeout(() => {
-        navigate('/login');
+        navigate('/home');
       }, 2000);
     }
   }, [user]);
@@ -43,12 +43,10 @@ const Login = () => {
     <div style={{ padding: '10px'}}>
       <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px' }}>
         <LogoAndTitle />
-          <TextInput labelText="Nome" textValue={values.name} onChange={handleChange} />
-          <TextInput labelText="Cognome" textValue={values.surname} onChange={handleChange} />
           <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} />
           <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           <MyAlert message={alertText} severity={alertType} />
-          <PrimaryButton  labelText="Registrati" onClick={handleSubmit} />
+          <PrimaryButton  labelText="Login" onClick={handleSubmit} />
       </div>
     </div>
   )

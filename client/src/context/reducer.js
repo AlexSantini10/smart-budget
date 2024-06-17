@@ -1,6 +1,8 @@
 import {
     DISPLAY_ALERT,
     CLEAR_ALERT,
+    SETUP_USER,
+    SETUP_USER_END,
     REGISTER_USER_BEGIN,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_ERROR,
@@ -61,11 +63,40 @@ const reducer = (state, action) => {
         }
     }
 
+    if (action.type === SETUP_USER) {
+        return {
+            ...state,
+            isUserSetupLoading: true
+        };
+    }
+
+    if (action.type === SETUP_USER_END) {
+
+        if (!action.payload) {
+            return {
+                ...state,
+                isUserSetupLoading: false,
+            };
+        }
+
+        if (action.payload.user === null) {
+            return {
+                ...state,
+                isUserSetupLoading: false
+            };
+        }
+
+        return {
+            ...state,
+            user: action.payload.user,
+            isUserSetupLoading: false,
+        };
+    }
+
     if (action.type === REGISTER_USER_BEGIN) {
         return {
             ...state,
-            isUserLoading: true,
-            isApplicationLoading: true
+            isUserLoading: true
         };
     }
 
@@ -95,7 +126,6 @@ const reducer = (state, action) => {
     if (action.type === LOGIN_USER_BEGIN) {
         return {
             ...state,
-            isUserLoading: true,
             isApplicationLoading: true
         };
     }
@@ -133,7 +163,6 @@ const reducer = (state, action) => {
     if (action.type === UPDATE_USER_BEGIN) {
         return {
             ...state, 
-            isUserLoading: true
         };
     }
 
@@ -161,7 +190,6 @@ const reducer = (state, action) => {
     if (action.type === DELETE_USER_BEGIN) {
         return {
             ...state, 
-            isUserLoading: true
         };
     }
 

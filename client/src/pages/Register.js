@@ -5,9 +5,11 @@ import { useAppContext } from '../context/appContext'
 import MyAlert from '../components/MyAlert'
 import { Loading } from '../components'
 
+let isUserAlreadyLogged = false;
+
 const Register = () => {
   const navigate = useNavigate();
-  const {user, isUserLoading, displayAlert, alertText, alertType, registerUser} = useAppContext();
+  const {user, isUserLoading, displayAlert, alertText, alertType, registerUser, getCurrentUser, isUserSetupLoading} = useAppContext();
 
   const initialState = {
     nome: (user && user.nome) || '',
@@ -33,25 +35,24 @@ const Register = () => {
   }
 
   useEffect(() => {
-    if (user) {
+    getCurrentUser();
+    if (user && isUserLoading) {
+      navigate('/home');
+    }
+  }, [user, navigate]);
+
+
+  useEffect(() => {
+    if (user && !isUserLoading) {
       displayAlert('Registrazione avvenuta con successo', 'success');
 
       setTimeout(() => {
         navigate('/home');
       }, 2000);
     }
-  }, [user]);
+  }, [isUserLoading]);
 
-  useEffect(() => {
-    if (user && user.nome && user.cognome && user.email) {
-      displayAlert('Utente  già loggato', 'success');
   
-      setTimeout(() => {
-        navigate('/home');
-      }, 2000);
-    }
-  }, []);
-
 
   return (
     <div style={{ padding: '10px'}}>

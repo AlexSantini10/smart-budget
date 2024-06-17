@@ -2,6 +2,9 @@ export const DISPLAY_ALERT = 'DISPLAY_ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
 
 // User actions
+export const  SETUP_USER = 'SETUP_USER';
+export const SETUP_USER_END = 'SETUP_USER_END';
+
 export const REGISTER_USER_BEGIN = 'REGISTER_USER_BEGIN';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';

@@ -40,7 +40,15 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // cors
-app.use(cors());
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Permetti richieste da tutte le origini
+        callback(null, true);
+    },
+    credentials: true  // Permette l'invio di cookie
+};
+
+app.use(cors(corsOptions));
 
 // Only in deployment -> serve the react app
 if (process.env.NODE_ENV === 'production') {
