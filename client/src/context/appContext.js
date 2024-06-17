@@ -296,7 +296,7 @@ const AppProvider = ({ children }) => {
             dispatch({type: DELETE_TRANSACTION_SUCCESS});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                //logoutUser();
             } else {
                 dispatch({type: DELETE_TRANSACTION_ERROR, payload: {alertText: error.response.data.error}});
             }
@@ -315,7 +315,7 @@ const AppProvider = ({ children }) => {
             dispatch({type: DELETE_CONTO_SUCCESS});
         } catch (error) {
             if (error.response.status === 401) {
-                logoutUser();
+                // logoutUser();
             } else {
                 dispatch({type: DELETE_CONTO_ERROR, payload: {alertText: error.response.data.error}});
             }

@@ -357,6 +357,32 @@ const reducer = (state, action) => {
         };
     }
 
+    if (action.type === DELETE_CONTO_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === DELETE_CONTO_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            conti: []
+        }
+    }
+
+    if (action.type === DELETE_CONTO_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+    
+
 }
 
 export default reducer;

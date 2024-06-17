@@ -74,6 +74,13 @@ const delete_conto = async (conto_id) => {
         throw new Error('Conto not found');
     }
 
+    let trans_pool = await connect();
+    let trans_result = await trans_pool.request()
+        .input('conto_id', conto_id)
+        .query('DELETE FROM transazioni WHERE id_conto_1 = @conto_id OR id_conto_2 = @conto_id');
+    
+    trans_pool.close();
+
     let pool = await connect();
 
     let result = await pool.request()

@@ -53,7 +53,7 @@ const Conti = () => {
     , [conti]);
 
   const eliminaConto = (id) => {
-    console.log("Elimino la transazione con id: ", id);
+    console.log("Elimino il conto con id: ", id);
     deleteConto(id);
   }
 
