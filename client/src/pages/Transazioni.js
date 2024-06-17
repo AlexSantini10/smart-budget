@@ -43,7 +43,7 @@ const Transazioni = () => {
       let dataString = actDate.getDate() + "/" + (actDate.getMonth() + 1) + "/" + actDate.getFullYear();
 
       act_firstLabels.push(transazioni[i].nome + ' - ' + dataString);
-      act_secondLabels.push((transazioni[i].tipo_movimento === 1 ? '+' : (transazioni[i].tipo_movimento === 2 ? '-' : '')) + transazioni[i].importo + "€ (" + transazioni[i].nomeConto + (transazioni[i].tipo_movimento === 3 ? " -> " + transazioni[i].nomeConto2 : "") + ")");
+      act_secondLabels.push((transazioni[i].tipo_movimento === 1 ? '+' : (transazioni[i].tipo_movimento === 2 ? '-' : '')) + transazioni[i].importo + "€ (" + transazioni[i].nomeConto + (transazioni[i].tipo_movimento === 3 ? " -> " + transazioni[i].nomeConto2 : "") + ") " + transazioni[i].nomeCategoria);
       act_componentsA.push(<PulsanteImmagine Img="PennaModifica.svg" action={() => modificaTransazione(act_ID)} />);
       act_componentsB.push(<PulsanteImmagine Img="CestinoElimina.svg" action={() => eliminaTransazione(act_ID)} />);
 
