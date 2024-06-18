@@ -15,8 +15,11 @@ const Login = () => {
   
   const [values, setValues] = useState(initialState);
 
-  const handleChange = (key, value) => {
-    setValues({...values, [key]: value});
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
   }
 
   const handleSubmit = () => {
@@ -73,8 +76,8 @@ const Login = () => {
             marginTop: '-10px'
             }}>Accedi per continuare</p>
           <div style={{marginLeft: '10%'}}>
-          <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} />
-          <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
+          <TextInput name="email" labelText="Email" textType="email" textValue={values.email} onChange={handleChange} />
+          <TextInput name="password" labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           <MyAlert message={alertText} severity={alertType} />
           <div style={{width:'100%'}}>
             <PrimaryButton  labelText="Accedi" onClick={handleSubmit} sx={{width: '100%', height: '10%'}} />

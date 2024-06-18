@@ -5,8 +5,17 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function DropDown({labelText, elements, style, onChange, name}) {
+export default function DropDown({labelText, elements, style, onChange, name, selectedValue}) {
   const [value, setValue] = React.useState('');
+
+  React.useEffect(() => {
+    if (selectedValue)
+      setValue(selectedValue);
+    
+
+    console.log(selectedValue);
+    console.log(value);
+  }, []);
 
   const handleChange = (event) => {
     setValue(event.target.value);

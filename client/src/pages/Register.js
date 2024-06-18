@@ -20,8 +20,12 @@ const Register = () => {
   
   const [values, setValues] = useState(initialState);
 
-  const handleChange = (key, value) => {
-    setValues({...values, [key]: value});
+  const handleChange = (event) => {
+    console.log(event.target.name, event.target.value);
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
   }
 
   const handleSubmit = () => {
@@ -87,12 +91,12 @@ const Register = () => {
 
           <div style={{marginLeft: '20px'}}>
           <div style={{display: 'flex', width: '80%'}}>
-          <TextInput labelText="Nome" textValue={values.name} onChange={handleChange} />
-          <TextInput labelText="Cognome" textValue={values.surname} onChange={handleChange} />
+          <TextInput name="nome" labelText="Nome" textValue={values.name} onChange={handleChange} />
+          <TextInput name="cognome" labelText="Cognome" textValue={values.surname} onChange={handleChange} />
           </div>
           <div style={{width: '85%'}}>
-          <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} sx={{width:'100%'}}/>
-          <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
+          <TextInput name="email" labelText="Email" textType="email" textValue={values.email} onChange={handleChange} sx={{width:'100%'}}/>
+          <TextInput name="password" labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           </div>
           </div>
           <MyAlert message={alertText} severity={alertType} />

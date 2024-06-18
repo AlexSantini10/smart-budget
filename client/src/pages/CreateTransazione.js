@@ -36,8 +36,6 @@ const CreateTransazione = () => {
 
   const handleChange = (event) => {
     const {name, value} = event.target;
-    //console.log(name, value);
-
     setFormData({...formData, [name]: value});
   };
 
@@ -53,8 +51,6 @@ const CreateTransazione = () => {
     if (formData.tipo_movimento === 3 && formData.id_conto_2 === '') {
       to_send_data.id_conto_2 = null;
     }
-
-    console.log(to_send_data);
 
     createTransazione(to_send_data);
 
