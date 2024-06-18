@@ -71,7 +71,6 @@ const Conti = () => {
 
       <div style={{ height: "40%", position: 'relative', bottom: 0, display: 'flex', flexDirection: 'column' }}>
         <ButtonArea />
-        <TornaAllaHome />
       </div>
     </div>
   )

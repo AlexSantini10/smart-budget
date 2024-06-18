@@ -13,10 +13,12 @@ const PrimaryButton = ({labelText, onClick}) => {
         color: "#FFF",
         textAlign: "center",
         fontFamily: "Inter",
-        fontSize: "14px",
+        fontSize: "18px",
         fontStyle: "normal",
         fontWeight: 700,
         lineHeight: "normal",
+        width: "90%",
+        height: "100%"
       }}>{labelText}</Button>
     </div>
   )

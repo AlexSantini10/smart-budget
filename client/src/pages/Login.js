@@ -51,13 +51,39 @@ const Login = () => {
 
   return (
     <div style={{ padding: '10px'}}>
-      <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px' }}>
+      <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px', display:'flex', flexDirection:'column', alignContent: 'center' }}>
         <LogoAndTitle />
+          <p style={{ 
+            color: 'rgba(51, 52, 55, 0.80)',
+            textAlign: 'center',
+            fontFamily: 'Inter',
+            fontSize: '24px',
+            fontStyle: 'normal',
+            fontWeight: 700,
+            lineHeight: 'normal'
+            }}>Benvenuto</p>
+          <p style={{ 
+            color: 'rgba(51, 52, 55, 0.80)',
+            textAlign: 'center',
+            fontFamily: 'Inter',
+            fontSize: '18px',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            lineHeight: 'normal',
+            marginTop: '-10px'
+            }}>Accedi per continuare</p>
+          <div style={{marginLeft: '10%'}}>
           <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} />
           <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
           <MyAlert message={alertText} severity={alertType} />
-          <PrimaryButton  labelText="Login" onClick={handleSubmit} />
-          Non hai un account? <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>Registrati</Link>
+          <div style={{width:'100%'}}>
+            <PrimaryButton  labelText="Accedi" onClick={handleSubmit} sx={{width: '100%', height: '10%'}} />
+          </div>
+          <div style={{textAlign: 'left', marginTop: '10px', color: 'rgba(51, 52, 55, 0.80)', fontFamily: 'Inter', fontSize: '18px', fontStyle: 'normal', fontWeight: 500, lineHeight: 'normal'}}>
+            Non hai un account? <Link to="/" style={{ textDecoration: 'none', color: '#38A0FF' }}>Registrati</Link>
+          </div>
+          </div>
+          
       </div>
     </div>
   )

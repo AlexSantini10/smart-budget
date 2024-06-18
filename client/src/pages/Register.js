@@ -59,15 +59,52 @@ const Register = () => {
 
   return (
     <div style={{ padding: '10px'}}>
-      <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px' }}>
+      <div style={{ width: 'fit-content', margin: '0 auto', marginTop:'50px', display:'flex', flexDirection:'column', alignContent: 'center' }}>
+        <div style={{marginLeft:'15%'}}>
         <LogoAndTitle />
+        </div>
+        <p style={{ 
+            color: 'rgba(51, 52, 55, 0.80)',
+            textAlign: 'center',
+            fontFamily: 'Inter',
+            fontSize: '24px',
+            fontStyle: 'normal',
+            fontWeight: 700,
+            lineHeight: 'normal',
+            }}>Benvenuto</p>
+          <br/>
+          <div style={{marginLeft: '10px', width: '100%'}}>
+          <p style={{ 
+            color: 'rgba(51, 52, 55, 0.80)',
+            textAlign: 'left',
+            fontFamily: 'Inter',
+            fontSize: '19px',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            lineHeight: 'normal',
+            marginLeft: '7px'
+            }}>Crea un account per iniziare</p>
+
+          <div style={{marginLeft: '20px'}}>
+          <div style={{display: 'flex', width: '80%'}}>
           <TextInput labelText="Nome" textValue={values.name} onChange={handleChange} />
           <TextInput labelText="Cognome" textValue={values.surname} onChange={handleChange} />
-          <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} />
+          </div>
+          <div style={{width: '85%'}}>
+          <TextInput labelText="Email" textType="email" textValue={values.email} onChange={handleChange} sx={{width:'100%'}}/>
           <TextInput labelText="Password" textType="password" textValue={values.password} onChange={handleChange} />
+          </div>
+          </div>
           <MyAlert message={alertText} severity={alertType} />
           <PrimaryButton  labelText="Registrati" onClick={handleSubmit} />
-          Già registrato? <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>Login</Link>
+          <div style={{textAlign: 'left', marginTop: '10px', color: 'rgba(51, 52, 55, 0.80)', fontFamily: 'Inter', 
+            fontSize: '18px', fontStyle: 'normal', fontWeight: 500, lineHeight: 'normal',
+            }}>
+          Hai già un account? <Link to="/login" style={{ textDecoration: 'none', color: '#38A0FF' }}>Accedi</Link>
+          </div>
+
+          </div>
+
       </div>
     </div>
   )

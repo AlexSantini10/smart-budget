@@ -12,12 +12,12 @@ const TextInput = ({labelText, textType, textValue, onChange}) => {
     }
 
     return (
-        <div style={{margin:'10px'}}>
+        <div style={{marginTop:'10px', marginBottom:'10px', marginLeft:'-10px'}}>
             <TextField type={textType} label={labelText} variant="outlined" onChange={handleChange} 
             sx={{
-                /*
-                    borderRadius: "8px",
-                    border: "1px solid rgba(51, 52, 55, 0.50)",
+                
+                    //borderRadius: "20px",
+                    //border: "1px solid rgba(51, 52, 55, 0.50
                     background: "#FFF",
                     color: "rgba(51, 52, 55, 0.70)",
                     textAlign: "center",
@@ -26,7 +26,8 @@ const TextInput = ({labelText, textType, textValue, onChange}) => {
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
-                */
+                    width: "90%",
+                
             }}
             />
         </div>
