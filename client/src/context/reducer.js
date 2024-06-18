@@ -51,7 +51,10 @@ import {
     GET_SALDO_ERROR,
     GET_CONTI_BEGIN,
     GET_CONTI_SUCCESS,
-    GET_CONTI_ERROR
+    GET_CONTI_ERROR,
+    GET_CATEGORIE_BEGIN,
+    GET_CATEGORIE_SUCCESS,
+    GET_CATEGORIE_ERROR,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -290,7 +293,7 @@ const reducer = (state, action) => {
         return {
             ...state,
             isApplicationLoading: false,
-            transazioni: [...state.transazioni, action.payload.transazioni],
+            transazioni: [],
             showAlert: true,
             alertText: 'Transazione creata con successo',
             alertType: 'success'
@@ -382,6 +385,55 @@ const reducer = (state, action) => {
         };
     }
     
+    if (action.type === GET_CATEGORIE_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === GET_CATEGORIE_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            categorie: action.payload.categorie
+        };
+    }
+
+    if (action.type === GET_CATEGORIE_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
+    if (action.type === CREATE_TRANSACTION_BEGIN) {
+        return {
+            ...state,
+            isApplicationLoading: true
+        };
+    }
+
+    if (action.type === CREATE_TRANSACTION_SUCCESS) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+        }
+    }
+
+    if (action.type === CREATE_TRANSACTION_ERROR) {
+        return {
+            ...state,
+            isApplicationLoading: false,
+            showAlert: true,
+            alertText: action.payload.alertText,
+            alertType: 'error'
+        };
+    }
+
 
 }
 

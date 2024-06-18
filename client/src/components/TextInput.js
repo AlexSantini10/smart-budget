@@ -1,19 +1,12 @@
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({labelText, textType, textValue, onChange}) => {
+const TextInput = ({name, labelText, textType, textValue, onChange, style}) => {
     const [value, setValue] = useState(textValue);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-
-        if (onChange)
-            onChange(labelText.toLowerCase(), event.target.value);
-    }
-
     return (
-        <div style={{marginTop:'10px', marginBottom:'10px', marginLeft:'-10px'}}>
-            <TextField type={textType} label={labelText} variant="outlined" onChange={handleChange} 
+        <div style={style}>
+            <TextField name={name} type={textType} label={labelText} variant="outlined" onChange={onChange} 
             sx={{
                 
                     //borderRadius: "20px",

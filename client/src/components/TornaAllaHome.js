@@ -13,7 +13,7 @@ export default function TornaAllaHome(defaultValue = "Home") {
   };
 
   return (
-    <div style={{position: 'Relative'}}>
+    <div style={{position: 'relative'}}>
         <BottomNavigation sx={{
             height: "100%",
             width: "100%",

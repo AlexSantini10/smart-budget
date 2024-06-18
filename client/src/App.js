@@ -11,6 +11,7 @@ import {
   Error
 } from './pages';
 import ProtectedRoute from './pages/ProtectedRoute';
+import CreateTransazione from './pages/CreateTransazione';
 
 
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
         <Route path="/conti" element={<ProtectedRoute><Conti /></ProtectedRoute>} />
         <Route path="/categorie" element={<ProtectedRoute><Categorie /></ProtectedRoute>} />
         <Route path="/gestione-profilo" element={<ProtectedRoute><GestioneProfilo /></ProtectedRoute>} />
+
+        <Route path="/crea-transazione" element={<ProtectedRoute><CreateTransazione /></ProtectedRoute>} />
       
         <Route path="/login" element={<Login />} />
         <Route index element={<Register />} />

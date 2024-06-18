@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 
-const PrimaryButton = ({labelText, onClick}) => {
+const PrimaryButton = ({labelText, onClick, style}) => {
   return (
-    <div>
+    <div style={style}>
       <Button variant="contained" onClick={onClick}
       sx={{
         borderRadius: "8px",

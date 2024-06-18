@@ -2,8 +2,8 @@ import React from 'react'
 import Button from '@mui/material/Button';
 
 
-const OutlinedButton = ({labelText}) => (
-    <Button variant="outlined"
+const OutlinedButton = ({labelText, action}) => (
+    <Button variant="outlined" onClick={action}
     sx={{
         color: '#38A0FF',
         textTransform: 'capitalize',

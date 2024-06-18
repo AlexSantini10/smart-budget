@@ -27,9 +27,14 @@ const get_transazione = async (transazione_id) => {
 }
 
 const create_transazione = async (user_id, importo, nome, data, ora, tipo_movimento, id_categoria, id_conto_1, id_conto_2) => {
-    let pool = await connect();
-
-    let result = await pool.request()
+    try {
+        let pool = await connect();
+    
+        if (tipo_movimento !== 3) {
+            id_conto_2 = null;
+        }
+        
+        let result = await pool.request()
         .input('user_id', user_id)
         .input('importo', importo)
         .input('nome', nome)
@@ -42,10 +47,14 @@ const create_transazione = async (user_id, importo, nome, data, ora, tipo_movime
         .query(`
             INSERT INTO transazioni (id_utente, importo, nome, data, ora, tipo_movimento, id_categoria, id_conto_1, id_conto_2)
             VALUES (@user_id, @importo, @nome, @data, @ora, @tipo_movimento, @id_categoria, @id_conto_1, @id_conto_2)
-        `);
-
-    pool.close();
-    return result
+            `);
+            
+        pool.close();
+        return result
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 const edit_transazione = async (transazione_id, data_to_update) => {

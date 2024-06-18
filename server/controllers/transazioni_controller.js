@@ -27,6 +27,7 @@ const getTransazione = async (req, res) => {
 const createTransazione = async (req, res) => {
     const user_id = req.user.ID;
     const {importo, nome, data, ora, tipo_movimento, id_categoria, id_conto_1, id_conto_2} = req.body;
+
     if (!importo || !nome || !data || !ora || !tipo_movimento || !id_categoria || !id_conto_1) {
         throw new BadRequestError('Please provide all the required fields');
     }

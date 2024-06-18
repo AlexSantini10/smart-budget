@@ -5,26 +5,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function DropDown({labelText, elements}) {
+export default function DropDown({labelText, elements, style, onChange, name}) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    onChange(event);
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box style={style} sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{labelText}</InputLabel>
+        <InputLabel >{labelText}</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
           value={value}
           label={labelText}
+          name={name}
           onChange={handleChange}
         >
-          {elements && Object.entries(elements).map(([id,nomeConto]) => (
-            <MenuItem key={id} value={id}>{nomeConto}</MenuItem> 
+          {elements && elements.map(({ID,nome}) => (
+            <MenuItem key={ID} value={ID}>{nome}</MenuItem> 
           ))}
         </Select>
       </FormControl>

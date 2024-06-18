@@ -9,6 +9,8 @@ import {
 } from '../components'
 const Home = () => {
 
+  const navigate = useNavigate();
+
   const { saldo, saldoPassato, getSaldo, getTransazioni, transazioni, deleteTransazione } = useAppContext();
 
   const [firstLabels, setFirstLabels] = React.useState([]);
@@ -69,6 +71,10 @@ const Home = () => {
 
   }
 
+  const handleCreateTransazione = () => {
+    navigate('/crea-transazione');
+  }
+
   return (
     <div style={{ width: "60vh", height: "100vh", margin: 'auto', display: 'flex', flexDirection: 'column' }}>
       <TopArea />
@@ -77,7 +83,7 @@ const Home = () => {
       <PaperList firstLabels={firstLabels} secondLabels={secondLabels} ComponentA={componentsA} ComponentB={componentsB} />
 
       <div style={{ height: "40%", position: 'relative', bottom: 0, display: 'flex', flexDirection: 'column' }}>
-        <ButtonArea />
+        <ButtonArea action={handleCreateTransazione} />
       </div>
     </div>
   )

@@ -56,7 +56,10 @@ import {
     UPDATE_CATEGORIA_ERROR,
     DELETE_CATEGORIA_BEGIN,
     DELETE_CATEGORIA_SUCCESS,
-    DELETE_CATEGORIA_ERROR
+    DELETE_CATEGORIA_ERROR,
+    GET_CATEGORIE_BEGIN,
+    GET_CATEGORIE_SUCCESS,
+    GET_CATEGORIE_ERROR,
 } from './actions';
 
 
@@ -292,6 +295,26 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const getCategorie = async () => {
+        dispatch({type: GET_CATEGORIE_BEGIN});
+
+        try {
+            const response = await categorieAxios.get('/');
+
+            const categorie = response.data;
+
+            dispatch({type: GET_CATEGORIE_SUCCESS, payload: {categorie}});
+        } catch (error) {
+            if (error.response.status === 401) {
+                //logoutUser();
+            } else {
+                dispatch({type: GET_CATEGORIE_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+
+        clearAlert();
+    }
+
     const logoutUser = async () => {
         await authAxios.get('/logout');
         Cookies.remove('token');
@@ -336,6 +359,26 @@ const AppProvider = ({ children }) => {
         clearAlert();
     }
 
+    const createTransazione = async (transazione) => {
+        dispatch({type: CREATE_TRANSACTION_BEGIN});
+
+        try {
+            const response = await transactionsAxios.post('/', transazione);
+
+            dispatch({type: CREATE_TRANSACTION_SUCCESS});
+        }
+        catch (error) {
+            if (error.response.status === 401) {
+                //logoutUser();
+            } else {
+                dispatch({type: CREATE_TRANSACTION_ERROR, payload: {alertText: error.response.data.error}});
+            }
+        }
+
+        getTransazioni();
+        clearAlert();
+    }
+
     return (
         <AppContext.Provider value={{
                                     ...state, 
@@ -350,7 +393,9 @@ const AppProvider = ({ children }) => {
                                     getTransazioni,
                                     deleteTransazione,
                                     getConti,
-                                    deleteConto
+                                    deleteConto,
+                                    getCategorie,
+                                    createTransazione,
                                     }}>
             {children}
         </AppContext.Provider>
