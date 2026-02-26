@@ -2,6 +2,8 @@
 
 **Smart Budget** è un'applicazione web per la gestione del budget personale. Permette di tenere traccia delle proprie finanze, gestire conti, categorie e transazioni, e visualizzare il saldo in tempo reale.
 
+> 🎓 Progetto sviluppato per il corso di **Ingegneria del Software** — Corso di Laurea in **Ingegneria Informatica T**, [Università di Bologna (UNIBO)](https://www.unibo.it/).
+
 ---
 
 ## 🛠️ Tecnologie Utilizzate
