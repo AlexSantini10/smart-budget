@@ -4,6 +4,20 @@
 
 ---
 
+## 📚 Progetto Universitario
+
+Progetto sviluppato per il corso di **Ingegneria del Software** del corso di laurea in **Ingegneria Informatica T** presso l'**Università di Bologna (UNIBO)**.
+
+### 👥 Autori
+
+| GitHub | Nome |
+|--------|------|
+| [@AlexSantini10](https://github.com/AlexSantini10) | Alex Santini |
+| [@ErJem](https://github.com/ErJem) | ErJem |
+| [@lucax58](https://github.com/lucax58) | lucax58 |
+
+---
+
 ## 🛠️ Tecnologie Utilizzate
 
 | Layer | Tecnologia |
