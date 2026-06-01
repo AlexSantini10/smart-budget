@@ -13,8 +13,8 @@ Progetto sviluppato per il corso di **Ingegneria del Software** del corso di lau
 | GitHub | Nome |
 |--------|------|
 | [@AlexSantini10](https://github.com/AlexSantini10) | Alex Santini |
-| [@ErJem](https://github.com/ErJem) | ErJem |
-| [@lucax58](https://github.com/lucax58) | lucax58 |
+| [@ErJem](https://github.com/ErJem) | Jemel Merouche |
+| [@lucax58](https://github.com/lucax58) | Luca Marongiu |
 
 ---
 
