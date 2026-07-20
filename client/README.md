@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Copyright (c) 2024 Alex Santini
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

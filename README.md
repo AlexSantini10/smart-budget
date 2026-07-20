@@ -1,5 +1,7 @@
 # Smart Budget
 
+Copyright (c) 2024 Alex Santini
+
 **Smart Budget** è un'applicazione web per la gestione del budget personale. Permette di tenere traccia delle proprie finanze, gestire conti, categorie e transazioni, e visualizzare il saldo in tempo reale.
 
 ---
